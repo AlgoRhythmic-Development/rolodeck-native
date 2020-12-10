@@ -17,7 +17,7 @@ const Home = () => {
             <Button 
                 title="Get Started" 
                 color="#1B1B1B" 
-                onPress={() => Alert.alert("this should take you to the login page")}
+                onPress={() => Alert.alert("Under construction")}
             />
         </View>
     )   
