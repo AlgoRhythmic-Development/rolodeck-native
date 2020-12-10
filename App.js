@@ -8,6 +8,7 @@ import React from "react";
 
 import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import SignupScreen from "./src/screens/Signup";
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,13 @@ const App = () => {
         <Stack.Screen
           name="Profile"
           component={ProfileScreen}
+          options={({ route }) => ({
+            title: route.params.name,
+          })}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={SignupScreen}
           options={({ route }) => ({
             title: route.params.name,
           })}

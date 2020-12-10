@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Text, View, TextInput, Button } from 'react-native';
 
-const Signup = () => {
+const SignupScreen = () => {
   const [formState, setFormState] = useState({
     username: "",
     email: "",
@@ -24,4 +24,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupScreen;
