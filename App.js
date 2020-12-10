@@ -6,6 +6,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 // import { StyleSheet, Text, View } from "react-native";
 
+import Home from "./src/screens/Home";
 import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 
@@ -29,13 +30,20 @@ const App = () => {
         {/* Add a Stack.Screen component for each screen you want to add to navigation.
         It requires a name Prop which will be used to navigate to that screen from anywhere,
         as well as a component prop which tells the navigator which prop to render for that route. */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Home"
           component={HomeScreen}
           initialParams={{ name: "Dummy" }}
           options={{
             title: "Home",
           }}
+        /> */}
+        <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          title: "Home",
+        }}
         />
         <Stack.Screen
           name="Profile"

@@ -1,7 +1,8 @@
+import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Alert, Button, StyleSheet, Text, View } from 'react-native';
 
-const Home = () => {
+const Home = ({route, navigation}) => {
 
     // We'll add this in at a later time.
     // redirect to my cards page if username is the logged-in user's
@@ -11,13 +12,15 @@ const Home = () => {
 
     return (
         <View>
+            <StatusBar style="auto" />
             <Text>Welcome to RoloDeck!</Text>
             <Text>Join a community of business professionals.</Text>
             <Text>Log in or sign-up to get started!</Text>
             <Button 
                 title="Get Started" 
-                color="#1B1B1B" 
                 onPress={() => Alert.alert("Under construction")}
+                // this will go to the log in page
+                // onPress={() => navigation.navigate("Login", { name: "Dummy" })}
             />
         </View>
     )   
