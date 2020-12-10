@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { Text, View, TextInput, Button } from 'react-native';
+import { StatusBar } from "expo-status-bar";
 
 const SignupScreen = () => {
-  const [formState, setFormState] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
+  // const [formState, setFormState] = useState({
+  //   username: "",
+  //   email: "",
+  //   password: "",
+  // });
 
   return (
     <View>
+      <StatusBar style='auto' />
       <Text> Login Form </Text>
       <View>
         <TextInput placeeholder="Enter Username" />
