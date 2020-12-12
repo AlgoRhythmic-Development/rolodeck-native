@@ -18,7 +18,7 @@ const Home = ({route, navigation}) => {
             <Text>Log in or sign-up to get started!</Text>
             <Button 
                 title="Get Started" 
-                onPress={() => Alert.alert("Under construction")}
+                onPress={() => navigation.navigate("Login", {name: "Dummy"})}
                 // this will go to the log in page
                 // onPress={() => navigation.navigate("Login", { name: "Dummy" })}
             />

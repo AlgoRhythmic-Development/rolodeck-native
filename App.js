@@ -7,6 +7,7 @@ import React from "react";
 // import { StyleSheet, Text, View } from "react-native";
 
 import Home from "./src/screens/Home";
+import Login from "./src/screens/Login";
 import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 
@@ -43,6 +44,13 @@ const App = () => {
         component={Home}
         options={{
           title: "Home",
+        }}
+        />
+        <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{
+          title: "Login",
         }}
         />
         <Stack.Screen
