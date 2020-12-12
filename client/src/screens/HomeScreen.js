@@ -1,10 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Button, Text } from "react-native";
+import { useQuery } from "@apollo/client";
 
 const HomeScreen = ({ route, navigation }) => {
   const { name } = route.params;
-
+  const {data, loading} = useQuery()
   return (
     <>
       <StatusBar style="auto" />
