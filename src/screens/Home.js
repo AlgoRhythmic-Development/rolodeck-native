@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Alert, Button, StyleSheet, Text, View } from 'react-native';
+import { Link } from '@react-navigation/native';
 
 const Home = ({route, navigation}) => {
 
@@ -18,10 +19,10 @@ const Home = ({route, navigation}) => {
             <Text>Log in or sign-up to get started!</Text>
             <Button 
                 title="Get Started" 
-                onPress={() => navigation.navigate("Login", {name: "Dummy"})}
-                // this will go to the log in page
-                // onPress={() => navigation.navigate("Login", { name: "Dummy" })}
+                onPress={() => navigation.navigate("Login", {name: "Login"})}
             />
+
+            <Text>This exists to test <Link to= "/Create">create page</Link></Text>
         </View>
     )   
 };

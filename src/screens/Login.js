@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Alert, Button, StyleSheet, Text, View } from 'react-native';
-import { TextInput } from "react-native-gesture-handler";
+import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Link } from '@react-navigation/native';
 
 const Login = ({route, navigation}) => {
 
@@ -54,10 +54,16 @@ const Login = ({route, navigation}) => {
                 />
             </View>
             <View>
-                <Text>Need to create an account? Head to our signup page</Text>
+                {/* This Link will need to hook up to the sign up page */}
+                <Text>Need to create an account? Head to our <Link style={styles.linkText} to= "/Home">signup page</Link></Text>
             </View>
         </View>
     )   
 };
 
+const styles = StyleSheet.create({
+    linkText :{
+        color: 'blue'
+    }
+})
 export default Login

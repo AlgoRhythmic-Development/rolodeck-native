@@ -8,6 +8,7 @@ import React from "react";
 
 import Home from "./src/screens/Home";
 import Login from "./src/screens/Login";
+import Create from "./src/screens/Create";
 import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 
@@ -51,6 +52,13 @@ const App = () => {
         component={Login}
         options={{
           title: "Login",
+        }}
+        />
+        <Stack.Screen
+        name="Create"
+        component={Create}
+        options={{
+          title: "Create",
         }}
         />
         <Stack.Screen
