@@ -23,6 +23,7 @@ const Home = ({route, navigation}) => {
             />
 
             <Text>This exists to test <Link to= "/Create">create page</Link></Text>
+            <Text>This exists to test <Link to= "/Contact">contact page</Link></Text>
         </View>
     )   
 };

@@ -1,11 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 
 const NoMatch = () => {
   return (
     <View>
-      Oops, we couldn't find that page.
+      <Text>Oops, we couldn't find that page.</Text>
     </View>
   );
 };
