@@ -12,6 +12,7 @@ import Create from "./src/screens/Create";
 import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import SignupScreen from "./src/screens/Signup";
+import NoMatch from "./src/screens/NoMatch";
 
 const Stack = createStackNavigator();
 
