@@ -11,6 +11,9 @@ import Login from "./src/screens/Login";
 import Create from "./src/screens/Create";
 import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import SignupScreen from "./src/screens/Signup";
+import NoMatch from "./src/screens/NoMatch";
+import Contact from "./src/screens/Contact";
 
 const Stack = createStackNavigator();
 
@@ -64,6 +67,20 @@ const App = () => {
         <Stack.Screen
           name="Profile"
           component={ProfileScreen}
+          options={({ route }) => ({
+            title: route.params.name,
+          })}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={SignupScreen}
+          options={({ route }) => ({
+            title: route.params.name,
+          })}
+        />
+        <Stack.Screen
+          name="Contact"
+          component={Contact}
           options={({ route }) => ({
             title: route.params.name,
           })}

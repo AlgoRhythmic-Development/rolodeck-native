@@ -14,6 +14,10 @@ const HomeScreen = ({ route, navigation }) => {
         title="Click me to view profile"
         onPress={() => navigation.navigate("Profile", { name: "Dummy" })}
       />
+      <Button
+        title="Click me to Signup"
+        onPress={() => navigation.navigate("Signup", { name: "Dummy" })}
+      />
     </>
   );
 };

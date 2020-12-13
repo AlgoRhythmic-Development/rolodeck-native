@@ -55,7 +55,7 @@ const Login = ({route, navigation}) => {
             </View>
             <View>
                 {/* This Link will need to hook up to the sign up page */}
-                <Text>Need to create an account? Head to our <Link style={styles.linkText} to= "/Home">signup page</Link></Text>
+                <Text>Need to create an account? Head to our <Link style={styles.linkText} to= "/Signup">signup page</Link></Text>
             </View>
         </View>
     )   
