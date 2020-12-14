@@ -8,8 +8,14 @@ import { AppRegistry } from "react-native";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 // import { StyleSheet, Text, View } from "react-native";
 
+import Home from "./src/screens/Home";
+import Login from "./src/screens/Login";
+import Create from "./src/screens/Create";
 import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import SignupScreen from "./src/screens/Signup";
+import NoMatch from "./src/screens/NoMatch";
+import Contact from "./src/screens/Contact";
 
 const Stack = createStackNavigator();
 
@@ -41,17 +47,52 @@ const App = () => {
           {/* Add a Stack.Screen component for each screen you want to add to navigation.
         It requires a name Prop which will be used to navigate to that screen from anywhere,
         as well as a component prop which tells the navigator which prop to render for that route. */}
+          {/* <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          initialParams={{ name: "Dummy" }}
+          options={{
+            title: "Home",
+          }}
+        /> */}
           <Stack.Screen
             name="Home"
-            component={HomeScreen}
-            initialParams={{ name: "Dummy" }}
+            component={Home}
             options={{
               title: "Home",
             }}
           />
           <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              title: "Login",
+            }}
+          />
+          <Stack.Screen
+            name="Create"
+            component={Create}
+            options={{
+              title: "Create",
+            }}
+          />
+          <Stack.Screen
             name="Profile"
             component={ProfileScreen}
+            options={({ route }) => ({
+              title: route.params.name,
+            })}
+          />
+          <Stack.Screen
+            name="Signup"
+            component={SignupScreen}
+            options={({ route }) => ({
+              title: route.params.name,
+            })}
+          />
+          <Stack.Screen
+            name="Contact"
+            component={Contact}
             options={({ route }) => ({
               title: route.params.name,
             })}
