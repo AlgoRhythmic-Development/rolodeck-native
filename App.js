@@ -11,7 +11,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import Home from "./src/screens/Home";
 import Login from "./src/screens/Login";
 import Create from "./src/screens/Create";
-import HomeScreen from "./src/screens/HomeScreen";
+import FetchTest from "./src/screens/FetchTest";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import SignupScreen from "./src/screens/Signup";
 import NoMatch from "./src/screens/NoMatch";
@@ -23,7 +23,7 @@ const cache = new InMemoryCache();
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: "https://rolodeck-native-server.herokuapp.com/",
+  uri: "https://rolodeck-native-server.herokuapp.com/graphql",
   cache,
   defaultOptions: { watchQuery: { fetchPolicy: "cache-and-network" } },
 });
@@ -47,14 +47,14 @@ const App = () => {
           {/* Add a Stack.Screen component for each screen you want to add to navigation.
         It requires a name Prop which will be used to navigate to that screen from anywhere,
         as well as a component prop which tells the navigator which prop to render for that route. */}
-          {/* <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          initialParams={{ name: "Dummy" }}
-          options={{
-            title: "Home",
-          }}
-        /> */}
+          <Stack.Screen
+            name="FetchTest"
+            component={FetchTest}
+            initialParams={{ name: "Dummy" }}
+            options={{
+              title: "GraphQL Testing",
+            }}
+          />
           <Stack.Screen
             name="Home"
             component={Home}
