@@ -1,46 +1,49 @@
 import { StatusBar } from "expo-status-bar";
+import Constants from "expo-constants";
 import React from "react";
-import { View, Text } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  SectionList,
+  Text,
+  StyleSheet,
+} from "react-native";
 import { gql, useQuery } from "@apollo/client";
-// import { QUERY_USERS } from "../utils/queries";
-// import gql from "graphql-tag";
 
-const FetchTest = ({ route, navigation }) => {
+const FetchTest = () => {
   const QUERY_USERS = gql`
     query users {
       users {
         _id
         username
         email
-        cards {
-          _id
-          logoUrl
-          companyName
-          tagline
-          name
-          jobTitle
-          website
-          phone
-          email
-        }
       }
     }
   `;
 
-  // const { name } = route.params;
-
   const { data, loading } = useQuery(QUERY_USERS);
 
-  let users;
+  let usersArr = data?.users || [];
 
-  data ? (users = data.users) : (users = "User data unavailable...");
-
-  users?.forEach((user) => {
+  usersArr.forEach((user) => {
     console.log(user.username);
+    console.log(user.email);
+  });
+
+  console.log("users: " + usersArr);
+
+  // found this solution to using forEach in react-native. Looks like you essentially have to push each iteration into a single array, then simply insert the array into the jsx where needed.
+  let userList = [];
+  usersArr.forEach(function (user, i) {
+    userList.push(
+      <View key={i} style={styles.list}>
+        <Text>{user.username}</Text>
+      </View>
+    );
   });
 
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
       <Text>Test GraphQL on this Screen</Text>
       <Text>"QUERY_USER" response:</Text>
@@ -48,13 +51,22 @@ const FetchTest = ({ route, navigation }) => {
       {loading ? (
         <Text>Loading...</Text>
       ) : (
-        // this isn't working for some reason, need to look into forEach/map functions within react-native?
-        users.forEach((user) => {
-          <Text>{user.username}</Text>;
-        })
+        // see line 40
+        userList
       )}
-    </View>
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: Constants.statusBarHeight,
+    marginHorizontal: 16,
+  },
+  list: {
+    marginTop: "10%",
+  },
+});
 
 export default FetchTest;
