@@ -9,13 +9,14 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 // import { StyleSheet, Text, View } from "react-native";
 
 import Home from "./src/screens/Home";
-import Login from "./src/screens/Login";
-import Create from "./src/screens/Create";
-import FetchTest from "./src/screens/FetchTest";
-import ProfileScreen from "./src/screens/ProfileScreen";
-import SignupScreen from "./src/screens/Signup";
-import NoMatch from "./src/screens/NoMatch";
-import Contact from "./src/screens/Contact";
+// import Login from "./src/screens/Login";
+// import Create from "./src/screens/Create";
+// import FetchTest from "./src/screens/FetchTest";
+// import ProfileScreen from "./src/screens/ProfileScreen";
+// import SignupScreen from "./src/screens/Signup";
+// import NoMatch from "./src/screens/NoMatch";
+// import Contact from "./src/screens/Contact";
+import Collection from './src/screens/Collection';
 
 const Stack = createStackNavigator();
 
@@ -37,32 +38,39 @@ const App = () => {
         <Stack.Navigator
           initialRouteName="Home"
           screenOptions={{
-            headerStyle: { backgroundColor: "#212121" },
-            headerTintColor: "#FFCB6B",
+            headerStyle: {backgroundColor: '#212121'},
+            headerTintColor: '#FFCB6B',
             headerTitleStyle: {
-              fontWeight: "bold",
+              fontWeight: 'bold',
             },
           }}
         >
           {/* Add a Stack.Screen component for each screen you want to add to navigation.
         It requires a name Prop which will be used to navigate to that screen from anywhere,
         as well as a component prop which tells the navigator which prop to render for that route. */}
-          <Stack.Screen
+          {/* <Stack.Screen
             name="FetchTest"
             component={FetchTest}
             initialParams={{ name: "Dummy" }}
             options={{
               title: "GraphQL Testing",
             }}
-          />
+          /> */}
           <Stack.Screen
             name="Home"
             component={Home}
             options={{
-              title: "Home",
+              title: 'Home',
             }}
           />
           <Stack.Screen
+            name="Collection"
+            component={Collection}
+            options={{
+              title: 'Collection',
+            }}
+          />
+          {/* <Stack.Screen
             name="Login"
             component={Login}
             options={{
@@ -95,8 +103,8 @@ const App = () => {
             component={Contact}
             options={({ route }) => ({
               title: route.params.name,
-            })}
-          />
+            })} 
+          />*/}
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
