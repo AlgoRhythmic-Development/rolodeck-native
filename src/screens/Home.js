@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Alert, Button, StyleSheet, Text, View } from "react-native";
 import { Link } from "@react-navigation/native";
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 const Home = ({ route, navigation }) => {
   // We'll add this in at a later time.
@@ -9,6 +10,16 @@ const Home = ({ route, navigation }) => {
   // if (Auth.loggedIn()) {
   //     return <Redirect to="/cards" />;
   // }
+
+  const bottomTabNavigator = createBottomTagNavigator(
+      {
+          Home: Home,
+          Login: Login,
+      },
+      {
+          initialRouteName: 'Home'
+      }
+  );
 
   return (
     <View>
