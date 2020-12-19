@@ -11,9 +11,8 @@ import {
 } from "react-native";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { QUERY_USERS } from "../utils/queries";
-import { ADD_USER, LOGIN_USER } from "../utils/mutations";
+import { ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
-import * as AuthSession from "expo-auth-session";
 
 const FetchTest = () => {
   const [addUser] = useMutation(ADD_USER);
@@ -21,8 +20,8 @@ const FetchTest = () => {
     try {
       const { data } = await addUser({
         variables: {
-          username: "tayremigi",
-          email: "tayremigi@gmail.com",
+          username: "kaya",
+          email: "kayathebean@gmail.com",
           password: "123456",
         },
       });
@@ -33,33 +32,6 @@ const FetchTest = () => {
     }
     return console.log(data);
   };
-
-  const [loginUser] = useMutation(LOGIN_USER);
-  const loginUserTest = async () => {
-    try {
-      const { data } = await loginUser({
-        variables: {
-          email: "tayremigi@gmail.com",
-          password: "123456",
-        },
-      });
-
-      Auth.login(data.loginUser.token);
-    } catch (e) {
-      console.error(e);
-    }
-    return console.log(data);
-  };
-
-  // const QUERY_USERS = gql`
-  //   query users {
-  //     users {
-  //       _id
-  //       username
-  //       email
-  //     }
-  //   }
-  // `;
 
   const { data, loading } = useQuery(QUERY_USERS);
 

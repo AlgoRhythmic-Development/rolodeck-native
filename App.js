@@ -6,6 +6,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { AppRegistry } from "react-native";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { StyleSheet, Text, View } from "react-native";
 
 import Home from "./src/screens/Home";
@@ -23,6 +24,15 @@ const cache = new InMemoryCache();
 
 // Initialize Apollo Client
 const client = new ApolloClient({
+  request: (operation) => {
+    const token = AsyncStorage.getItem("id_token");
+
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : "",
+      },
+    });
+  },
   uri: "https://rolodeck-native-server.herokuapp.com/graphql",
   cache,
   defaultOptions: { watchQuery: { fetchPolicy: "cache-and-network" } },
