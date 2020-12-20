@@ -1,3 +1,6 @@
+.expo/web/cache
+package-lock.json
+
 # Logs
 logs
 *.log

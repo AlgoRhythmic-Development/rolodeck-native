@@ -25,6 +25,7 @@ const cache = new InMemoryCache();
 // Initialize Apollo Client
 const client = new ApolloClient({
   uri: "https://rolodeck-native-server.herokuapp.com/graphql",
+  // uri: "http://localhost:3001/graphql",
   cache,
   defaultOptions: { watchQuery: { fetchPolicy: "cache-and-network" } },
 });
