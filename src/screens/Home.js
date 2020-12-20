@@ -31,7 +31,14 @@ const Home = ({ route, navigation }) => {
         title="Test GraphQL"
         onPress={() => navigation.navigate("FetchTest")}
       />
+<<<<<<< HEAD
       <Button title="Test Login" onPress={() => navigation.navigate("Login")} />
+=======
+      <Button
+        title="Collection"
+        onPress={() => navigation.navigate("Collection")}
+      />
+>>>>>>> main
     </View>
   );
 };
