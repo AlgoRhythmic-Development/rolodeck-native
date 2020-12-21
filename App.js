@@ -4,9 +4,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { AppRegistry } from "react-native";
+import { AppRegistry, TabBarIOS } from "react-native";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 // import { StyleSheet, Text, View } from "react-native";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Home from "./src/screens/Home";
 import Login from "./src/screens/Login";
@@ -19,6 +20,7 @@ import Contact from "./src/screens/Contact";
 import Collection from './src/screens/Collection';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const cache = new InMemoryCache();
 
@@ -106,6 +108,12 @@ const App = () => {
             })}
           />
         </Stack.Navigator>
+      </NavigationContainer>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name='Home' component={Home} />
+          <Tab.Screen name='Collection' component={Collection} />
+        </Tab.Navigator>
       </NavigationContainer>
     </ApolloProvider>
   );
