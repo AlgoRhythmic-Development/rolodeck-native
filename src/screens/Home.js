@@ -11,15 +11,6 @@ const Home = ({ route, navigation }) => {
   //     return <Redirect to="/cards" />;
   // }
 
-  const bottomTabNavigator = createBottomTagNavigator(
-      {
-          Home: Home,
-          Login: Login,
-      },
-      {
-          initialRouteName: 'Home'
-      }
-  );
 
   return (
     <View>
