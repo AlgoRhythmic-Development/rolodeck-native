@@ -16,6 +16,7 @@ import ProfileScreen from "./src/screens/ProfileScreen";
 import SignupScreen from "./src/screens/Signup";
 import NoMatch from "./src/screens/NoMatch";
 import Contact from "./src/screens/Contact";
+import Collection from './src/screens/Collection';
 
 const Stack = createStackNavigator();
 
@@ -95,6 +96,13 @@ const App = () => {
             component={Contact}
             options={({ route }) => ({
               title: route.params.name,
+            })}
+          />
+          <Stack.Screen
+            name="Collection"
+            component={Collection}
+            options={({ route }) => ({
+              title: "Collection",
             })}
           />
         </Stack.Navigator>
