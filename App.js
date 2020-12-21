@@ -5,7 +5,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { AppRegistry } from "react-native";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { StyleSheet, Text, View } from "react-native";
 
@@ -17,24 +23,41 @@ import ProfileScreen from "./src/screens/ProfileScreen";
 import SignupScreen from "./src/screens/Signup";
 import NoMatch from "./src/screens/NoMatch";
 import Contact from "./src/screens/Contact";
-import Collection from './src/screens/Collection';
+import Collection from "./src/screens/Collection";
 
 const Stack = createStackNavigator();
 
 const cache = new InMemoryCache();
 
+const httpLink = createHttpLink({
+  uri: "https://rolodeck-native-server.herokuapp.com/graphql",
+});
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token if it exists
+  const token = AsyncStorage.getItem("id_token");
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
 // Initialize Apollo Client
 const client = new ApolloClient({
-  request: (operation) => {
-    const token = AsyncStorage.getItem("id_token");
+  // request: async (operation) => {
+  //   const token = await AsyncStorage.getItem("id_token");
 
-    operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : "",
-      },
-    });
-  },
-  uri: "https://rolodeck-native-server.herokuapp.com/graphql",
+  //   operation.setContext({
+  //     headers: {
+  //       authorization: token ? `Bearer ${token}` : "",
+  //     },
+  //   });
+  // },
+  // uri: "https://rolodeck-native-server.herokuapp.com/graphql",
+  link: authLink.concat(httpLink),
   cache,
   defaultOptions: { watchQuery: { fetchPolicy: "cache-and-network" } },
 });
@@ -90,9 +113,9 @@ const App = () => {
           <Stack.Screen
             name="Profile"
             component={ProfileScreen}
-            options={({ route }) => ({
-              title: route.params.name,
-            })}
+            // options={({ route }) => ({
+            //   title: route.params.name,
+            // })}
           />
           <Stack.Screen
             name="Signup"

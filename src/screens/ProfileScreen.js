@@ -1,14 +1,22 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { useQuery, useMutation } from "@apollo/client";
 import { Button, Text } from "react-native";
+import { QUERY_ME } from "../utils/queries";
 
 const ProfileScreen = ({ route, navigation }) => {
-  const { name } = route.params;
+  const { data, loading } = useQuery(QUERY_ME);
+
+  const me = data?.me || [];
+
+  if (data) {
+    console.log(data);
+  }
 
   return (
     <>
       <StatusBar style="auto" />
-      <Text>{name}'s Profile Page</Text>
+      <Text>{me.username}'s Profile Page</Text>
       <Button
         title="Click me to go home"
         onPress={() => navigation.navigate("Home", { name: "Dummy" })}

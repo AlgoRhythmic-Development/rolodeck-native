@@ -1,102 +1,75 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { Link } from "@react-navigation/native";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
 import { LOGIN_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ route, navigation }) => {
   const [login, { error }] = useMutation(LOGIN_USER);
 
-  const loginUserTest = async () => {
+  const logoutUser = async () => {
+    try {
+      await Auth.logout();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const [emailInput, setEmailInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
+  const userInput = {
+    email: emailInput,
+    password: passwordInput,
+  };
+
+  // submit form
+  const handleFormSubmit = async () => {
+    console.log("submit button pressed");
+    console.log({ ...userInput });
+
     try {
       const { data } = await login({
-        variables: {
-          email: "kayathebean@gmail.com",
-          password: "123456",
-        },
+        variables: { ...userInput },
       });
 
       Auth.login(data.login.token);
-      return console.log(data.login);
     } catch (e) {
       console.error(e);
     }
+
+    // clear form values
+    setEmailInput("");
+    setPasswordInput("");
+
+    navigation.navigate("Profile");
   };
-
-  const logoutUserTest = async () => {
-    console.log("attempting to log out...");
-    try {
-      await Auth.logout();
-      return console.log("logged out successfully");
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const [queryMe, { data }] = useLazyQuery(QUERY_ME);
-
-  const runMyQuery = () => {
-    queryMe();
-    console.log(queryMe());
-    console.log(data);
-  };
-  //   console.log(Auth.getProfile());
-
-  // We'll add this in at a later time.
-  // const [formState, setFormState] = useState({ email: "", password: "" });
-
-  // const [login, { error }] = useMutation(LOGIN_USER);
-
-  // // update state based on form input changes
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-
-  //   setFormState({
-  //     ...formState,
-  //     [name]: value,
-  //   });
-  // };
-
-  // // submit form
-  // const handleFormSubmit = async (event) => {
-  //   event.preventDefault();
-
-  //   try {
-  //     const { data } = await login({
-  //       variables: { ...formState },
-  //     });
-
-  //     Auth.login(data.login.token);
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-
-  //   // clear form values
-  //   setFormState({
-  //     email: "",
-  //     password: "",
-  //   });
-  // };
 
   return (
     <View>
       <StatusBar style="auto" />
       <Text> Sign in</Text>
       <View>
-        <Button title="Test Login" onPress={() => loginUserTest()} />
-        <Button title="Test Logout" onPress={() => logoutUserTest()} />
-        <TextInput placeholder="Email" />
-        <TextInput secureTextEntry={true} placeholder="Password" />
-        <Button
-          title="Submit"
-          onPress={() => Alert.alert("Under construction")}
+        <TextInput
+          name="email"
+          placeholder="Email"
+          onChangeText={(text) => setEmailInput(text)}
+          defaultValue={emailInput}
         />
+        <TextInput
+          name="password"
+          secureTextEntry={true}
+          placeholder="Password"
+          onChangeText={(text) => setPasswordInput(text)}
+          defaultValue={passwordInput}
+        />
+        <Button title="Submit" onPress={() => handleFormSubmit()} />
+        <Button title="Logout" onPress={() => logoutUser()} />
       </View>
       <View>
-        <Text>No user logged in...</Text>
         <Button title="queryMe" onPress={() => runMyQuery()} />
       </View>
       <View>

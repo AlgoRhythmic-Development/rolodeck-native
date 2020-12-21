@@ -10,7 +10,7 @@ import {
   Button,
 } from "react-native";
 import { gql, useQuery, useMutation } from "@apollo/client";
-import { QUERY_USERS } from "../utils/queries";
+import { QUERY_USERS, QUERY_ME } from "../utils/queries";
 import { ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 
@@ -20,8 +20,8 @@ const FetchTest = () => {
     try {
       const { data } = await addUser({
         variables: {
-          username: "kaya",
-          email: "kayathebean@gmail.com",
+          username: "Taylor",
+          email: "tayremigi@gmail.com",
           password: "123456",
         },
       });
