@@ -70,7 +70,7 @@ const client = new ApolloClient({
   // uri: "https://rolodeck-native-server.herokuapp.com/graphql",
   link: link,
   cache,
-  defaultOptions: { watchQuery: { fetchPolicy: "network-only" } },
+  defaultOptions: { watchQuery: { fetchPolicy: "cache-and-network" } },
 });
 
 const App = () => {

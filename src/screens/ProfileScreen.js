@@ -17,6 +17,7 @@ const ProfileScreen = ({ navigation }) => {
     <>
       <StatusBar style="auto" />
       <Text>{me.username}'s Profile Page</Text>
+      <Text>{me.email}</Text>
       <Button
         title="Click me to go home"
         onPress={() => navigation.navigate("Home", { name: "Dummy" })}
