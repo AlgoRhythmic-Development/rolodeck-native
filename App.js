@@ -24,6 +24,7 @@ import ProfileScreen from "./src/screens/ProfileScreen";
 import SignupScreen from "./src/screens/Signup";
 import Contact from "./src/screens/Contact";
 import Collection from "./src/screens/Collection";
+import ScanScreen from "./src/screens/ScanScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -84,6 +85,7 @@ const App = () => {
         <Tab.Navigator>
           <Tab.Screen name='Home' component={Home} />
           <Tab.Screen name='Collection' component={Collection} />
+          <Tab.Screen name='Scan' component={ScanScreen} />
           <Tab.Screen name='Create' component={Create} />
           <Tab.Screen name='Contact' component={Contact} />
         </Tab.Navigator>

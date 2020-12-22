@@ -35,7 +35,9 @@
     "react-navigation": "^4.4.3"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "~7.9.0",
+    "@unimodules/core": "^6.0.0",
+    "expo-application": "^2.2.1"
   },
   "private": true
 }
