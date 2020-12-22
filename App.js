@@ -4,7 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { AppRegistry } from "react-native";
 import {
   ApolloClient,
   InMemoryCache,
@@ -14,7 +13,6 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Auth from "./src/utils/auth";
 // import { StyleSheet, Text, View } from "react-native";
 
 import Home from "./src/screens/Home";
@@ -23,10 +21,8 @@ import Create from "./src/screens/Create";
 import FetchTest from "./src/screens/FetchTest";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import SignupScreen from "./src/screens/Signup";
-import NoMatch from "./src/screens/NoMatch";
 import Contact from "./src/screens/Contact";
 import Collection from "./src/screens/Collection";
-import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 const Stack = createStackNavigator();
 
