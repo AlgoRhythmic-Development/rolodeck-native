@@ -1,12 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { Link } from "@react-navigation/native";
-import { useLazyQuery, useMutation } from "@apollo/client";
-import { QUERY_ME } from "../utils/queries";
+import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ route, navigation }) => {
   const [login, { error }] = useMutation(LOGIN_USER);
@@ -28,15 +26,11 @@ const Login = ({ route, navigation }) => {
 
   // submit form
   const handleFormSubmit = async () => {
-    console.log("submit button pressed");
-    console.log({ ...userInput });
-
     try {
       const { data } = await login({
         variables: { ...userInput },
       });
-
-      Auth.login(data.login.token);
+      await Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
     }

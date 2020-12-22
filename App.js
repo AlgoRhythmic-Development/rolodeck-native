@@ -10,9 +10,11 @@ import {
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
+  ApolloLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Auth from "./src/utils/auth";
 // import { StyleSheet, Text, View } from "react-native";
 
 import Home from "./src/screens/Home";
@@ -24,6 +26,7 @@ import SignupScreen from "./src/screens/Signup";
 import NoMatch from "./src/screens/NoMatch";
 import Contact from "./src/screens/Contact";
 import Collection from "./src/screens/Collection";
+import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 const Stack = createStackNavigator();
 
@@ -33,17 +36,26 @@ const httpLink = createHttpLink({
   uri: "https://rolodeck-native-server.herokuapp.com/graphql",
 });
 
-const authLink = setContext((_, { headers }) => {
-  // get the authentication token if it exists
-  const token = AsyncStorage.getItem("id_token");
-  // return the headers to the context so httpLink can read them
+let token;
+
+const getToken = async () => {
+  const storedToken = await AsyncStorage.getItem("id_token");
+  return (token = storedToken);
+};
+
+getToken();
+
+const authLink = setContext((_, { headers, ...context }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      ...(token ? { authorization: `Bearer ${token}` } : {}),
     },
+    ...context,
   };
 });
+
+const link = ApolloLink.from([authLink, httpLink]);
 
 // Initialize Apollo Client
 const client = new ApolloClient({
@@ -57,9 +69,9 @@ const client = new ApolloClient({
   //   });
   // },
   // uri: "https://rolodeck-native-server.herokuapp.com/graphql",
-  link: authLink.concat(httpLink),
+  link: link,
   cache,
-  defaultOptions: { watchQuery: { fetchPolicy: "cache-and-network" } },
+  // defaultOptions: { watchQuery: { fetchPolicy: "network-only" } },
 });
 
 const App = () => {

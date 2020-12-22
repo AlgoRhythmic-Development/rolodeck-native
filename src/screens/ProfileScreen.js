@@ -1,16 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { useQuery, useMutation } from "@apollo/client";
+import { gql, useQuery, useMutation } from "@apollo/client";
 import { Button, Text } from "react-native";
 import { QUERY_ME } from "../utils/queries";
 
-const ProfileScreen = ({ route, navigation }) => {
+const ProfileScreen = ({ navigation }) => {
   const { data, loading } = useQuery(QUERY_ME);
 
-  const me = data?.me || [];
+  const me = data?.me || {};
 
-  if (data) {
-    console.log(data);
+  if (!loading) {
+    console.log(me);
   }
 
   return (

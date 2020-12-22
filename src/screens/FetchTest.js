@@ -9,7 +9,7 @@ import {
   StyleSheet,
   Button,
 } from "react-native";
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USERS, QUERY_ME } from "../utils/queries";
 import { ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
