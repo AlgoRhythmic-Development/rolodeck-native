@@ -4,22 +4,34 @@ import React from "react";
 import {
   View,
   SafeAreaView,
-  SectionList,
+  ScrollView,
   Text,
   StyleSheet,
+  Button,
 } from "react-native";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_USERS, QUERY_ME } from "../utils/queries";
+import { ADD_USER } from "../utils/mutations";
+import Auth from "../utils/auth";
 
 const FetchTest = () => {
-  const QUERY_USERS = gql`
-    query users {
-      users {
-        _id
-        username
-        email
-      }
+  const [addUser] = useMutation(ADD_USER);
+  const addUserTest = async () => {
+    try {
+      const { data } = await addUser({
+        variables: {
+          username: "Taylor",
+          email: "tayremigi@gmail.com",
+          password: "123456",
+        },
+      });
+
+      Auth.login(data.addUser.token);
+    } catch (e) {
+      console.error(e);
     }
-  `;
+    return console.log(data);
+  };
 
   const { data, loading } = useQuery(QUERY_USERS);
 
@@ -46,13 +58,15 @@ const FetchTest = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
       <Text>Test GraphQL on this Screen</Text>
+      <Button title="Add User" onPress={() => addUserTest()} />
+      <Button title="Login" onPress={() => loginUserTest()} />
       <Text>"QUERY_USER" response:</Text>
 
       {loading ? (
         <Text>Loading...</Text>
       ) : (
         // see line 40
-        userList
+        <ScrollView>{userList}</ScrollView>
       )}
     </SafeAreaView>
   );
