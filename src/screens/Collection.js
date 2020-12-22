@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-// import { gql, useQuery } from '@apollo/client'
-// import { QUERY_CARD } from '../../utils/queries'
+import { gql, useQuery } from '@apollo/client'
+import { QUERY_CARDS } from '../utils/queries'
 
 import Card from '../components/Card';
 
@@ -16,19 +16,17 @@ const Collection = () => {
   for (let i = 0; i < 10; i++) {
     let randomInfo = faker.helpers.createCard();
     let randomImage = faker.image.image();
-    console.log(randomImage);
+    // console.log(randomImage);
 
     cardArr.push({ randomInfo, randomImage });
   }
 
-  // const { data, loading } = useQuery(QUERY_CARDS)
+  const { data, loading } = useQuery(QUERY_CARDS)
 
-  // let usersArr = data?.users || []
+  console.log(data)
+  let cardsArr = data?.cards || []
+  // console.log(cardsArr)
 
-  // usersArr.forEach(user => {
-  //   console.log(user.username)
-  //   console.log(user.email)
-  // })
 
   const renderItem = ({ item }) => <Card cardInfo={item} />;
 
@@ -37,7 +35,7 @@ const Collection = () => {
       <FlatList
         data={cardArr}
         renderItem={renderItem}
-        keyExtractor={(card) => card.username}
+        keyExtractor={(card) => card.randomInfo.username}
       />
     </View>
   );
