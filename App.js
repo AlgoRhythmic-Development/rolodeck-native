@@ -40,12 +40,15 @@ let token;
 
 const getToken = async () => {
   const storedToken = await AsyncStorage.getItem("id_token");
+
   return (token = storedToken);
 };
 
 getToken();
 
 const authLink = setContext((_, { headers, ...context }) => {
+  console.log("header token:");
+  console.log(token);
   return {
     headers: {
       ...headers,
@@ -71,7 +74,7 @@ const client = new ApolloClient({
   // uri: "https://rolodeck-native-server.herokuapp.com/graphql",
   link: link,
   cache,
-  // defaultOptions: { watchQuery: { fetchPolicy: "network-only" } },
+  defaultOptions: { watchQuery: { fetchPolicy: "network-only" } },
 });
 
 const App = () => {
