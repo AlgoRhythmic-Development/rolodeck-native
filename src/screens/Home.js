@@ -16,6 +16,7 @@ const Home = ({ route, navigation }) => {
     console.log("not logged in");
   }
 
+
   return (
     <View>
       <StatusBar style="auto" />
@@ -27,25 +28,11 @@ const Home = ({ route, navigation }) => {
         onPress={() => navigation.navigate("Login", { name: "Login" })}
       />
 
-      <Text>
-        This exists to test <Link to="/Create">create page</Link>
-      </Text>
-      <Text>
-        This exists to test <Link to="/Contact">contact page</Link>
-      </Text>
       <Button
         title="Test GraphQL"
         onPress={() => navigation.navigate("FetchTest")}
       />
       <Button title="Log In" onPress={() => navigation.navigate("Login")} />
-      <Button
-        title="Collection"
-        onPress={() => navigation.navigate("Collection")}
-      />
-      {/* <Button
-        title="My Profile"
-        onPress={() => navigation.navigate("Profile")}
-      /> */}
     </View>
   );
 };
