@@ -10,20 +10,22 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { BarCodeScanner, Permissions } from 'expo';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import * as Permissions from 'expo-permissions';
 
 const QrCodeScanner = () => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [lastScannedUrl, setLastScannedUrl] = useState(null);
-  const componentDidMount = () => {
-    requestCameraPermission();
-  }
-  componentDidMount();
 
   const requestCameraPermission = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     setHasCameraPermission(status === 'granted');
   };
+
+  const componentDidMount = () => {
+    requestCameraPermission();
+  };
+  componentDidMount();
 
   const handleBarCodeRead = (result) => {
     if (result.data !== lastScannedUrl) {
@@ -52,9 +54,9 @@ const QrCodeScanner = () => {
   };
 
   const maybeRenderUrl = () => {
-    if (!lastScannedUrl) {
-      return;
-    }
+    // if (!lastScannedUrl) {
+    //   return;
+    // }
 
     return (
       <View style={styles.bottomBar}>
@@ -81,7 +83,8 @@ const QrCodeScanner = () => {
         <Text style={{ color: '#fff' }}>Camera permission is not granted</Text>
       ) : (
         <BarCodeScanner
-          onBarCodeRead={handleBarCodeRead}
+          onBarCodeScanned={handleBarCodeRead}
+          barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
           style={{
             height: Dimensions.get('window').height,
             width: Dimensions.get('window').width,
