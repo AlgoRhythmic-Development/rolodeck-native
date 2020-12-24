@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, StatusBar, Text, View, Image } from 'react-native'
 import FlipCard from 'react-native-flip-card'
+import QrCode from 'react-native-qrcode-svg';
 
 const Card = ({ cardInfo }) => (
   <FlipCard
@@ -22,15 +23,8 @@ const Card = ({ cardInfo }) => (
     </View>
     {/* Back Side */}
     <View style={styles.back}>
-      <Text style={styles.title}>Back Side</Text>
+      <QrCode value="some random string" />
     </View>
-    {/* <View style={styles.card}>
-      <Image
-        source={{
-          uri: card.randomImage
-        }}
-      />
-    </View> */}
   </FlipCard>
 )
 
