@@ -16,6 +16,8 @@
     "@react-navigation/stack": "^5.12.8",
     "expo": "~39.0.2",
     "expo-auth-session": "~2.0.0",
+    "expo-barcode-scanner": "^9.0.0",
+    "expo-permissions": "^9.3.0",
     "expo-random": "~9.0.0",
     "expo-status-bar": "~1.0.2",
     "faker": "^5.1.0",
@@ -34,9 +36,7 @@
     "react-native-screens": "~2.10.1",
     "react-native-svg": "^12.1.0",
     "react-native-web": "~0.13.12",
-    "react-navigation": "^4.4.3",
-    "expo-permissions": "~9.3.0",
-    "expo-barcode-scanner": "~9.0.0"
+    "react-navigation": "^4.4.3"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
