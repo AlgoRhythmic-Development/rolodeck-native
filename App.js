@@ -3,7 +3,7 @@ import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import {
   ApolloClient,
   InMemoryCache,
@@ -14,7 +14,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { StyleSheet, Text, View } from "react-native";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Home from "./src/screens/Home";
 import Login from "./src/screens/Login";
@@ -42,7 +42,6 @@ const getToken = async () => {
 
   return (token = storedToken);
 };
-
 getToken();
 
 const authLink = setContext((_, { headers, ...context }) => {
@@ -83,11 +82,20 @@ const App = () => {
       initialRouteName determines default route. */}
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name='Home' component={Home} />
-          <Tab.Screen name='Collection' component={Collection} />
-          <Tab.Screen name='Scan' component={ScanScreen} />
-          <Tab.Screen name='Create' component={Create} />
-          <Tab.Screen name='Contact' component={Contact} />
+          {token == null ? (
+            <>
+              <Tab.Screen name="Login" component={Login} />
+              <Tab.Screen name="Signup" component={SignupScreen} />
+            </>
+          ) : (
+            <>
+              <Tab.Screen name="Home" component={Home} />
+              <Tab.Screen name="Collection" component={Collection} />
+              <Tab.Screen name="Scan" component={ScanScreen} />
+              <Tab.Screen name="Create" component={Create} />
+              <Tab.Screen name="Contact" component={Contact} />
+            </>
+          )}
         </Tab.Navigator>
       </NavigationContainer>
     </ApolloProvider>

@@ -1,6 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  SafeAreaView,
+} from "react-native";
 import { Link } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
@@ -38,12 +45,10 @@ const Login = ({ route, navigation }) => {
     // clear form values
     setEmailInput("");
     setPasswordInput("");
-
-    navigation.navigate("Profile");
   };
 
   return (
-    <View>
+    <SafeAreaView>
       <StatusBar style="auto" />
       <Text> Sign in</Text>
       <View>
@@ -75,7 +80,7 @@ const Login = ({ route, navigation }) => {
           </Link>
         </Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
