@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Alert, Button, StyleSheet, Text, View } from "react-native";
+import { Alert, Button, StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { Link } from "@react-navigation/native";
 import { QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
@@ -18,7 +18,7 @@ const Home = ({ route, navigation }) => {
 
 
   return (
-    <View>
+    <SafeAreaView>
       <StatusBar style="auto" />
       <Text>Welcome to RoloDeck!</Text>
       <Text>Join a community of business professionals.</Text>
@@ -33,8 +33,10 @@ const Home = ({ route, navigation }) => {
         onPress={() => navigation.navigate("FetchTest")}
       />
       <Button title="Log In" onPress={() => navigation.navigate("Login")} />
-    </View>
+    </SafeAreaView>
   );
 };
+
+  
 
 export default Home;
