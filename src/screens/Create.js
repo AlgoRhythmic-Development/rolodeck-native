@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Alert, Button, StyleSheet, Text, View } from 'react-native';
+import { Alert, Button, StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import CardForm from "../components/CardForm";
 
 const Create = ({route, navigation}) => {
@@ -12,13 +12,13 @@ const Create = ({route, navigation}) => {
     // }
 
     return (
-        <View>
+        <SafeAreaView>
             <StatusBar style="auto" />
             <Text>Create a Business Card</Text>
             <View>
                 <CardForm />
             </View>
-        </View>
+        </SafeAreaView>
     )   
 };
 

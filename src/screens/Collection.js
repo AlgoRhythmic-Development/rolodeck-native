@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, StatusBar, Text, View, Image } from 'react-native';
+import { StyleSheet, StatusBar, Text, View, Image, SafeAreaView } from 'react-native';
 // import { gql, useQuery } from '@apollo/client'
 // import { QUERY_CARD } from '../../utils/queries'
 import faker from 'faker';
@@ -16,14 +16,14 @@ const Item = ({ card }) => (
     clickable={true}
   >
     {/* Face Side */}
-    <View style={styles.card}>
+    <SafeAreaView style={styles.card}>
       <Text style={styles.title}>{card.randomInfo.company.name}</Text>
       <Text style={styles.item}>{card.randomInfo.company.catchPhrase}</Text>
       <Text style={styles.item}>{card.randomInfo.name}</Text>
       <Text style={styles.item}>{card.randomInfo.website}</Text>
       <Text style={styles.item}>{card.randomInfo.phone}</Text>
       <Text style={styles.item}>{card.randomInfo.email}</Text>
-    </View>
+    </SafeAreaView>
     {/* Back Side */}
     <View style={styles.back}>
       <Text style={styles.title}>Back Side</Text>

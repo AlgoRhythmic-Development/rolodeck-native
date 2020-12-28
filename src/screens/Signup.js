@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, StyleSheet, Text, TextInput, View, SafeAreaView } from 'react-native';
 import { StatusBar } from "expo-status-bar";
 import { Link } from '@react-navigation/native';
 
@@ -11,7 +11,7 @@ const SignupScreen = () => {
   // });
 
   return (
-    <View>
+    <SafeAreaView>
       <StatusBar style='auto' />
       <Text> Login Form </Text>
       <View>
@@ -32,7 +32,7 @@ const SignupScreen = () => {
         <Text><Link style={styles.linkText} to="/Home">Home</Link></Text>
       </View>
 
-    </View>
+    </SafeAreaView>
 
   );
 };

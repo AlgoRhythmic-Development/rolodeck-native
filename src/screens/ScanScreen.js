@@ -1,14 +1,14 @@
 import React from 'react';
 // import ContactForm from '../components/ContactForm';
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, StyleSheet, Text, TextInput, View, SafeAreaView } from 'react-native';
 
 const ScanScreen = () => {
 
     return (
-        <View>
+        <SafeAreaView>
             <Text>Scan Screen</Text>
 
-        </View >
+        </SafeAreaView >
     )
 };
 

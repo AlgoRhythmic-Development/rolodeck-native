@@ -5,6 +5,7 @@ import { Link } from "@react-navigation/native";
 import { QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 
+
 const Home = ({ route, navigation }) => {
   // We'll add this in at a later time.
   // redirect to my cards page if username is the logged-in user's

@@ -1,6 +1,5 @@
 // react-native-gesture-handler MUST BE AT TOP OF IMPORTS
 import "react-native-gesture-handler";
-// import { Header } from 'react-native-elements';
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -80,20 +79,22 @@ const client = new ApolloClient({
 
 const App = () => {
   return (
-    <ApolloProvider client={client}>
-      {/* <Header centerComponent={{ text: 'RoloDeck'}} /> */}
-      {/* Create navigator stack which will hold all "routes".
+    <>
+
+      <ApolloProvider client={client}>
+        {/* Create navigator stack which will hold all "routes".
       initialRouteName determines default route. */}
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name='Home' component={Home} />
-          <Tab.Screen name='Collection' component={Collection} />
-          <Tab.Screen name='Scan' component={ScanScreen} />
-          <Tab.Screen name='Create' component={Create} />
-          <Tab.Screen name='Contact' component={Contact} />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </ApolloProvider>
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen name='Home' component={Home} />
+            <Tab.Screen name='Collection' component={Collection} />
+            <Tab.Screen name='Scan' component={ScanScreen} />
+            <Tab.Screen name='Create' component={Create} />
+            <Tab.Screen name='Contact' component={Contact} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </ApolloProvider>
+    </>
   );
 };
 
