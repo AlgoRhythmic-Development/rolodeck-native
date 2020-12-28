@@ -13,6 +13,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Auth from "./src/utils/auth";
 // import { StyleSheet, Text, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -26,7 +27,6 @@ import Contact from "./src/screens/Contact";
 import Collection from "./src/screens/Collection";
 import ScanScreen from "./src/screens/ScanScreen";
 
-const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const cache = new InMemoryCache();
@@ -35,17 +35,9 @@ const httpLink = createHttpLink({
   uri: "https://rolodeck-native-server.herokuapp.com/graphql",
 });
 
-let token;
-
-const getToken = async () => {
-  const storedToken = await AsyncStorage.getItem("id_token");
-
-  return (token = storedToken);
-};
-getToken();
-
-const authLink = setContext((_, { headers, ...context }) => {
-  console.log("header token:");
+const authLink = setContext(async (_, { headers, ...context }) => {
+  const token = await Auth.getToken();
+  console.log("new header token:");
   console.log(token);
   return {
     headers: {
@@ -60,16 +52,6 @@ const link = ApolloLink.from([authLink, httpLink]);
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  // request: async (operation) => {
-  //   const token = await AsyncStorage.getItem("id_token");
-
-  //   operation.setContext({
-  //     headers: {
-  //       authorization: token ? `Bearer ${token}` : "",
-  //     },
-  //   });
-  // },
-  // uri: "https://rolodeck-native-server.herokuapp.com/graphql",
   link: link,
   cache,
   defaultOptions: { watchQuery: { fetchPolicy: "cache-and-network" } },
@@ -82,7 +64,7 @@ const App = () => {
       initialRouteName determines default route. */}
       <NavigationContainer>
         <Tab.Navigator>
-          {token == null ? (
+          {Auth.loggedIn() ? (
             <>
               <Tab.Screen name="Login" component={Login} />
               <Tab.Screen name="Signup" component={SignupScreen} />

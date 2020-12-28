@@ -8,14 +8,17 @@ import Auth from "../utils/auth";
 const Home = ({ route, navigation }) => {
   // We'll add this in at a later time.
   // redirect to my cards page if username is the logged-in user's
-  if (Auth.loggedIn() === true) {
+  if (Auth.loggedIn()) {
     // return <Redirect to="/cards" />;
     console.log("logged in");
-    Auth.getProfile();
+    let user;
+    Auth.getProfile().then((profile) => {
+      user = profile;
+    });
+    console.log(user);
   } else {
     console.log("not logged in");
   }
-
 
   return (
     <View>

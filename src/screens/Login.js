@@ -9,8 +9,9 @@ import {
   SafeAreaView,
 } from "react-native";
 import { Link } from "@react-navigation/native";
-import { useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
+import { QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 
 const Login = ({ route, navigation }) => {
@@ -37,6 +38,8 @@ const Login = ({ route, navigation }) => {
       const { data } = await login({
         variables: { ...userInput },
       });
+      console.log("new token from server:");
+      console.log(data.login.token);
       await Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
@@ -46,6 +49,9 @@ const Login = ({ route, navigation }) => {
     setEmailInput("");
     setPasswordInput("");
   };
+
+  const [queryMe, { loading, data }] = useLazyQuery(QUERY_ME);
+  const me = data?.me || {};
 
   return (
     <SafeAreaView>
@@ -69,7 +75,13 @@ const Login = ({ route, navigation }) => {
         <Button title="Logout" onPress={() => logoutUser()} />
       </View>
       <View>
-        <Button title="queryMe" onPress={() => runMyQuery()} />
+        <Button title="queryMe" onPress={() => queryMe()} />
+        {loading ? (
+          <Text>Loading user data...</Text>
+        ) : (
+          <Text>{me.username}</Text>
+        )}
+        <Button title="check profile" onPress={() => Auth.getProfile()} />
       </View>
       <View>
         {/* This Link will need to hook up to the sign up page */}
