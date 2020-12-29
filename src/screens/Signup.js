@@ -15,7 +15,7 @@ const SignupScreen = () => {
       <StatusBar style='auto' />
       <Text> Login Form </Text>
       <View>
-        <TextInput placeeholder="Enter Username" />
+        <TextInput placeholder="Enter Username" />
         <TextInput placeholder="Enter Email" />
         <TextInput
           secureTextEntry={true}

@@ -91,6 +91,7 @@ const App = () => {
             <Tab.Screen name='Scan' component={ScanScreen} />
             <Tab.Screen name='Create' component={Create} />
             <Tab.Screen name='Contact' component={Contact} />
+            <Tab.Screen name='Login' component={Login} />
           </Tab.Navigator>
         </NavigationContainer>
       </ApolloProvider>
