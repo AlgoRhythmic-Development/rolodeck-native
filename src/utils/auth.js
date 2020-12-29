@@ -34,10 +34,10 @@ class AuthService {
       const decoded = await jwt_decode(token);
       if (decoded.exp < Date.now() / 1000) {
         console.log("isTokenExpired = true");
-        return false;
+        return true;
       } else {
         console.log("isTokenExpired = false");
-        return true;
+        return false;
       }
     } catch (err) {
       return false;
