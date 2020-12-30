@@ -4,47 +4,54 @@ import { StatusBar } from "expo-status-bar";
 import { Link } from '@react-navigation/native';
 import { Formik } from 'formik';
 
-const SignupScreen = () => {
-  // const [formState, setFormState] = useState({
-  //   username: "",
-  //   email: "",
-  //   password: "",
-  // });
+// const SignupScreen = () => {
+//   // const [formState, setFormState] = useState({
+//   //   username: "",
+//   //   email: "",
+//   //   password: "",
+//   // });
 
-  return (
-    <View>
-      <StatusBar style='auto' />
-      <Text> Login Form </Text>
+ // this form will need styles from a global styles sheet.
+export default function SignupScreen() {
+
+  // this is where we'll need to pass the sign up data to the back end.
+  return(
       <View>
-        <Formik 
-          initialValues={{ username: '', email: '', password: '' }}
-          onSubmit={(values) => {
-            console.log(values)
-          }}
-        >
-          {(props)=> (
-            <View>
-              <TextInput
-                placeholder='Username'
-                onChangeText={props.handleChange('username')}
-                value={props.values.username}
-              />
-              <TextInput
-                placeholder='Email'
-                onChangeText={props.handleChange('email')}
-                value={props.values.email}
-              />
-              <TextInput
-                placeholder='Password'
-                onChangeText={props.handleChange('password')}
-                value={props.values.password}
-              />
+          <Text>Sign Up Form</Text>
+          <Formik
+              initialValues={{ username: '', email: '', password: '' }}
+              onSubmit={(values, actions) => {
+                  actions.resetForm();
+                  console.log(values);
+              }}
+          >
+              {(props) => (
+                  <View>
+                      <TextInput
+                          placeholder='Enter a username'
+                          onChangeText={props.handleChange('username')}
+                          value={props.values.username} 
+                      />  
 
-              <Button title='submit' onPress={props.handleSumbit}></Button>
-            </View>
-          )}      
-        </Formik>
+                      <TextInput
+                          placeholder='Enter your email'
+                          onChangeText={props.handleChange('email')}
+                          value={props.values.email} 
+                      />  
+
+                      <TextInput
+                          placeholder='Create a password'
+                          onChangeText={props.handleChange('password')}
+                          value={props.values.password} 
+                      />   
+
+                      <Button title='submit' onPress={props.handleSubmit} />
+                  </View>
+              )}
+          </Formik>
       </View>
+  )
+}
       
       {/* <View>
         <TextInput placeeholder="Enter Username" />
@@ -63,17 +70,12 @@ const SignupScreen = () => {
         {/* This Link will need to hook up to the Home page */}
         {/* <Text><Link style={styles.linkText} to="/Home">Home</Link></Text>
       </View> */}
-
-    </View>
-
-  );
-};
-
-const styles = StyleSheet.create({
-  linkText :{
-      color: 'blue'
-  }
-})
-
-
-export default SignupScreen;
+//     </View>
+//   );
+// };
+// const styles = StyleSheet.create({
+//   linkText :{
+//       color: 'blue'
+//   }
+// })
+// export default SignupScreen;
