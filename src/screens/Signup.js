@@ -17,7 +17,7 @@ export default function SignupScreen() {
   // this is where we'll need to pass the sign up data to the back end.
   return(
       <View>
-          <Text>Sign Up Form</Text>
+          <Text>Signup</Text>
           <Formik
               initialValues={{ username: '', email: '', password: '' }}
               onSubmit={(values, actions) => {
