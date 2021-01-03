@@ -138,6 +138,8 @@ import { Alert, Button, StatusBar, Text, TextInput, View } from "react-native";
 export default function Cardform() {
 
     // this is where we'll need to pass the login data to the back end.
+
+    // edit this form to include formik info.
     return(
         <View>
             <Text>Fill out the form below</Text>
