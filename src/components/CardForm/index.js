@@ -1,7 +1,7 @@
 import React from "react";
 import { Alert, Button, StatusBar, Text, TextInput, View } from "react-native";
 
-const CardForm = () => {
+// const CardForm = () => {
     // This is stuff that we will need to add in/fix later.
     // const [formState, setFormState] = useState({
     //     // logoUrl: "",
@@ -112,24 +112,99 @@ const CardForm = () => {
     //       console.error(e);
     //     }
     //   };
-    return (
-        <View>    
-            <StatusBar style="auto" />
-            <Text> Fill out the form below</Text>
-            <View>
-                <TextInput placeholder="Company Name" />
-                <TextInput placeholder="Company's Tagline" />
-                <TextInput placeholder="Full Name" />
-                <TextInput placeholder="Job Title" />
-                <TextInput placeholder="Company Website" />
-                <TextInput placeholder="Phone Number" />
-                <TextInput placeholder="Email Address" />
-                <Button 
-                    title="Submit" 
-                    onPress={() => Alert.alert("Under construction")} 
-                />
-            </View>
+
+
+//     return (
+//         <View>    
+//             <StatusBar style="auto" />
+//             <Text> Fill out the form below</Text>
+//             <View>
+//                 <TextInput placeholder="Company Name" />
+//                 <TextInput placeholder="Company's Tagline" />
+//                 <TextInput placeholder="Full Name" />
+//                 <TextInput placeholder="Job Title" />
+//                 <TextInput placeholder="Company Website" />
+//                 <TextInput placeholder="Phone Number" />
+//                 <TextInput placeholder="Email Address" />
+//                 <Button 
+//                     title="Submit" 
+//                     onPress={() => Alert.alert("Under construction")} 
+//                 />
+//             </View>
+//         </View>
+//     )
+// }
+
+export default function Cardform() {
+
+    // this is where we'll need to pass the login data to the back end.
+    return(
+        <View>
+            <Text>Fill out the form below</Text>
+            <Formik
+                initialValues={{ 
+                    companyName: "",
+                    tagline: "",
+                    name: "",
+                    jobTitle: "",
+                    website: "",
+                    phone: "",
+                    email: "",
+                }}
+
+                onSubmit={(values, actions) => {
+                    actions.resetForm();
+                    console.log(values);
+                }}
+            >
+                {(props) => (
+                    <View> 
+                        
+                        <TextInput
+                            placeholder='Create a password'
+                            onChangeText={props.handleChange('password')}
+                            value={props.values.password} 
+                        /> 
+
+                        <TextInput
+                            placeholder='Create a password'
+                            onChangeText={props.handleChange('password')}
+                            value={props.values.password} 
+                        /> 
+
+                        <TextInput
+                            placeholder='Create a password'
+                            onChangeText={props.handleChange('password')}
+                            value={props.values.password} 
+                        /> 
+
+                        <TextInput
+                            placeholder='Create a password'
+                            onChangeText={props.handleChange('password')}
+                            value={props.values.password} 
+                        /> 
+
+                        <TextInput
+                            placeholder='Create a password'
+                            onChangeText={props.handleChange('password')}
+                            value={props.values.password} 
+                        /> 
+
+                        <TextInput
+                            placeholder='Create a password'
+                            onChangeText={props.handleChange('password')}
+                            value={props.values.password} 
+                        /> 
+                        <TextInput
+                            placeholder='Enter your email address'
+                            onChangeText={props.handleChange('email')}
+                            value={props.values.email} 
+                        />    
+  
+                        <Button title='submit' onPress={props.handleSubmit} />
+                    </View>
+                )}
+            </Formik>
         </View>
     )
-}
-export default CardForm;
+  }
