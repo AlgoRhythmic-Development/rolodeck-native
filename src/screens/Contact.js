@@ -1,6 +1,7 @@
 import React from 'react';
 // import ContactForm from '../components/ContactForm';
 import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Formik } from 'formik';
 
 // const Contact = () => {
 

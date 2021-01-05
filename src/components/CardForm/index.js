@@ -1,5 +1,6 @@
 import React from "react";
 import { Alert, Button, StatusBar, Text, TextInput, View } from "react-native";
+import { Formik } from 'formik';
 
 // const CardForm = () => {
     // This is stuff that we will need to add in/fix later.
@@ -163,39 +164,39 @@ export default function Cardform() {
                     <View> 
                         
                         <TextInput
-                            placeholder='Create a password'
-                            onChangeText={props.handleChange('password')}
-                            value={props.values.password} 
+                            placeholder='Enter company name'
+                            onChangeText={props.handleChange('companyName')}
+                            value={props.values.companyName} 
                         /> 
 
                         <TextInput
-                            placeholder='Create a password'
-                            onChangeText={props.handleChange('password')}
-                            value={props.values.password} 
+                            placeholder='Enter tagline'
+                            onChangeText={props.handleChange('tagline')}
+                            value={props.values.tagline} 
                         /> 
 
                         <TextInput
-                            placeholder='Create a password'
-                            onChangeText={props.handleChange('password')}
-                            value={props.values.password} 
+                            placeholder='Enter Full Name'
+                            onChangeText={props.handleChange('name')}
+                            value={props.values.name} 
                         /> 
 
                         <TextInput
-                            placeholder='Create a password'
-                            onChangeText={props.handleChange('password')}
-                            value={props.values.password} 
+                            placeholder='Enter Job Title'
+                            onChangeText={props.handleChange('jobTitle')}
+                            value={props.values.jobTitle} 
                         /> 
 
                         <TextInput
-                            placeholder='Create a password'
-                            onChangeText={props.handleChange('password')}
-                            value={props.values.password} 
+                            placeholder='Enter Website'
+                            onChangeText={props.handleChange('website')}
+                            value={props.values.website} 
                         /> 
 
                         <TextInput
-                            placeholder='Create a password'
-                            onChangeText={props.handleChange('password')}
-                            value={props.values.password} 
+                            placeholder='Enter phone number'
+                            onChangeText={props.handleChange('phone')}
+                            value={props.values.phone} 
                         /> 
                         <TextInput
                             placeholder='Enter your email address'
