@@ -3,11 +3,35 @@ import { Alert, Button, StyleSheet, Text, TextInput, View, SafeAreaView } from '
 import { StatusBar } from "expo-status-bar";
 import { Link } from '@react-navigation/native';
 import { Formik } from 'formik';
+import { useStoreContext } from "../utils/Store";
+import { LOG_IN } from "../utils/actions";
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../utils/mutations";
+import Auth from "../utils/auth";
 
 // this form will need styles from a global styles sheet.
 export default function SignupScreen() {
-  // this is where we'll need to pass the sign up data to the back end.
+
+  const [state, dispatch] = useStoreContext();
   
+  // this is where we'll need to pass the sign up data to the back end.
+  const [addUser, { error }] = useMutation(ADD_USER);
+
+  const handleFormSubmit = async ({ values }) => {
+    try {
+      const { data } = await addUser({
+        variables: { ...values },
+      });
+      console.log(data);
+      await Auth.login(data.addUser.token);
+      dispatch({ type: LOG_IN });
+    } catch (e) {
+      console.error(e);
+      // // clear form values
+      // setEmailInput("");
+      // setPasswordInput("");
+    }
+  };
 
   return (
     <SafeAreaView>
@@ -16,7 +40,7 @@ export default function SignupScreen() {
         initialValues={{ username: '', email: '', password: '' }}
         onSubmit={(values, actions) => {
           actions.resetForm();
-          console.log(values);
+          handleFormSubmit({ values });
         }}
       >
         {(props) => (
