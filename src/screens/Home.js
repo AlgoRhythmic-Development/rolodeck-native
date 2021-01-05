@@ -1,27 +1,26 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Alert, Button, StyleSheet, Text, View } from "react-native";
+import { Alert, Button, StyleSheet, Text, SafeAreaView } from "react-native";
 import { Link } from "@react-navigation/native";
 import { QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
+import { useStoreContext } from "../utils/Store";
+import { LOG_IN, LOG_OUT } from "../utils/actions";
 
 const Home = ({ route, navigation }) => {
-  // We'll add this in at a later time.
-  // redirect to my cards page if username is the logged-in user's
-  if (Auth.loggedIn()) {
-    // return <Redirect to="/cards" />;
-    console.log("logged in");
-    let user;
-    Auth.getProfile().then((profile) => {
-      user = profile;
-    });
-    console.log(user);
-  } else {
-    console.log("not logged in");
-  }
+  const [state, dispatch] = useStoreContext();
+
+  const logoutUser = async () => {
+    try {
+      await Auth.logout();
+      dispatch({ type: LOG_OUT });
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
-    <View>
+    <SafeAreaView>
       <StatusBar style="auto" />
       <Text>Welcome to RoloDeck!</Text>
       <Text>Join a community of business professionals.</Text>
@@ -35,8 +34,9 @@ const Home = ({ route, navigation }) => {
         title="Test GraphQL"
         onPress={() => navigation.navigate("FetchTest")}
       />
-      <Button title="Log In" onPress={() => navigation.navigate("Login")} />
-    </View>
+
+      <Button title="Log Out" onPress={() => logoutUser()} />
+    </SafeAreaView>
   );
 };
 
