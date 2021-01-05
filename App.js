@@ -80,7 +80,6 @@ const client = new ApolloClient({
 const App = () => {
   return (
     <>
-
       <ApolloProvider client={client}>
         {/* Create navigator stack which will hold all "routes".
       initialRouteName determines default route. */}

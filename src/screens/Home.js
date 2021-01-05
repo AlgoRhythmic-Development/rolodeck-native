@@ -4,6 +4,7 @@ import { Alert, Button, StyleSheet, Text, View, SafeAreaView } from "react-nativ
 import { Link } from "@react-navigation/native";
 import { QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
+// import Header from 'react-native-elements';
 
 
 const Home = ({ route, navigation }) => {
@@ -19,22 +20,24 @@ const Home = ({ route, navigation }) => {
 
 
     return (
-        <SafeAreaView>
-            <StatusBar style="auto" />
-            <Text>Welcome to RoloDeck!</Text>
-            <Text>Join a community of business professionals.</Text>
-            <Text>Log in or sign-up to get started!</Text>
-            <Button
-                title="Get Started"
-                onPress={() => navigation.navigate("Login", { name: "Login" })}
-            />
+        <>
+            <SafeAreaView>
+                <StatusBar style="auto" />
+                <Text>Welcome to RoloDeck!</Text>
+                <Text>Join a community of business professionals.</Text>
+                <Text>Log in or sign-up to get started!</Text>
+                <Button
+                    title="Get Started"
+                    onPress={() => navigation.navigate("Login", { name: "Login" })}
+                />
 
-            <Button
-                title="Test GraphQL"
-                onPress={() => navigation.navigate("FetchTest")}
-            />
-            <Button title="Log In" onPress={() => navigation.navigate("Login")} />
-        </SafeAreaView>
+                <Button
+                    title="Test GraphQL"
+                    onPress={() => navigation.navigate("FetchTest")}
+                />
+                <Button title="Log In" onPress={() => navigation.navigate("Login")} />
+            </SafeAreaView>
+        </>
     );
 };
 
