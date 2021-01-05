@@ -16,6 +16,79 @@ import { LOGIN_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { Formik } from 'formik';
 
+
+// this form will need styles from a global styles sheet. Change name of function to Login
+export default function Login() {
+    // this is where we'll need to pass the login data to the back end.
+    const [state, dispatch] = useStoreContext();
+
+    const prevLoginCheck = async () => {
+        const check = await Auth.loggedIn();
+        console.log("check:");
+        console.log(check);
+        if (check) {
+            dispatch({ type: LOG_IN });
+        }
+    };
+
+    prevLoginCheck();
+
+    const [login, { error }] = useMutation(LOGIN_USER);
+
+    // const [emailInput, setEmailInput] = useState("");
+    // const [passwordInput, setPasswordInput] = useState("");
+    // const userInput = {
+    //     email: emailInput,
+    //     password: passwordInput,
+    // };
+
+    // submit form
+    const handleFormSubmit = async ({ values }) => {
+        try {
+            const { data } = await login({
+                variables: { ...values },
+            });
+            await Auth.login(data.login.token);
+            dispatch({ type: LOG_IN });
+        } catch (e) {
+            console.error(e);
+            // clear form values
+            // setEmailInput("");
+            // setPasswordInput("");
+        }
+    };
+
+    return (
+        <SafeAreaView>
+            <Text>Login</Text>
+            <Formik
+                initialValues={{ email: '', password: '' }}
+                onSubmit={(values, actions) => {
+                    actions.resetForm();
+                    handleFormSubmit({ values });
+                }}
+            >
+                {(props) => (
+                    <View>
+                        <TextInput
+                            placeholder='Enter your email'
+                            onChangeText={props.handleChange('email')}
+                            value={props.values.email}
+                        />
+                        <TextInput
+                            placeholder='Create a password'
+                            onChangeText={props.handleChange('password')}
+                            value={props.values.password}
+                        />
+                        <Button title='submit' onPress={props.handleSubmit} />
+                    </View>
+                )}
+            </Formik>
+        </SafeAreaView>
+    )
+};
+
+
 // const Login = ({ route, navigation }) => {
 
 //     return (
@@ -59,84 +132,3 @@ import { Formik } from 'formik';
 // });
 // export default Login;
 
-
-// this form will need styles from a global styles sheet. Change name of function to Login
-export default function Login() {
-    // this is where we'll need to pass the login data to the back end.
-    const [state, dispatch] = useStoreContext();
-
-    const prevLoginCheck = async () => {
-        const check = await Auth.loggedIn();
-        console.log("check:");
-        console.log(check);
-        if (check) {
-            dispatch({ type: LOG_IN });
-        }
-    };
-
-    prevLoginCheck();
-
-    const [login, { error }] = useMutation(LOGIN_USER);
-
-    // const [emailInput, setEmailInput] = useState("");
-    // const [passwordInput, setPasswordInput] = useState("");
-    // const userInput = {
-    //     email: emailInput,
-    //     password: passwordInput,
-    // };
-
-    // submit form
-    const handleFormSubmit = async ({ values }) => {
-        try {
-            const { data } = await login({
-                variables: { ...values },
-            });
-            await Auth.login(data.login.token);
-            dispatch({ type: LOG_IN });
-        } catch (e) {
-            console.error(e);
-            // clear form values
-            setEmailInput("");
-            setPasswordInput("");
-        }
-    };
-
-    const logoutUser = async () => {
-        try {
-            await Auth.logout();
-            dispatch({ type: LOG_OUT });
-        } catch (e) {
-            console.error(e);
-        }
-    };
-
-
-    return (
-        <SafeAreaView>
-            <Text>Login</Text>
-            <Formik
-                initialValues={{ email: '', password: '' }}
-                onSubmit={(values, actions) => {
-                    actions.resetForm();
-                    handleFormSubmit({ values });
-                }}
-            >
-                {(props) => (
-                    <View>
-                        <TextInput
-                            placeholder='Enter your email'
-                            onChangeText={props.handleChange('email')}
-                            value={props.values.email}
-                        />
-                        <TextInput
-                            placeholder='Create a password'
-                            onChangeText={props.handleChange('password')}
-                            value={props.values.password}
-                        />
-                        <Button title='submit' onPress={props.handleSubmit} />
-                    </View>
-                )}
-            </Formik>
-        </SafeAreaView>
-    )
-}

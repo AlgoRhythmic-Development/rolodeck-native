@@ -50,6 +50,7 @@ const Card = () => {
     console.log(randomImage);
 
     cardArr.push({ randomInfo, randomImage });
+    console.log(cardArr);
   }
 
   // const createCards = () => {
@@ -81,7 +82,7 @@ const Card = () => {
       <FlatList
         data={cardArr}
         renderItem={renderItem}
-        keyExtractor={(item) => item.username}
+        keyExtractor={ item => item.username }
       />
     </View>
   );
