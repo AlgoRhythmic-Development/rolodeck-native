@@ -79,6 +79,7 @@ export default function Login() {
                             placeholder='Create a password'
                             onChangeText={props.handleChange('password')}
                             value={props.values.password}
+                            // secureTextEntry={true}
                         />
                         <Button title='submit' onPress={props.handleSubmit} />
                     </View>

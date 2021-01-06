@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Button, StatusBar, Text, TextInput, View } from "react-native";
+import { Alert, Button, Keyboard, StatusBar, Text, TextInput, TouchableWithoutFeedback, View } from "react-native";
 import { Formik } from 'formik';
 
 // const CardForm = () => {
@@ -161,6 +161,8 @@ export default function Cardform() {
                 }}
             >
                 {(props) => (
+                    // this one does close the keyboard but after every keystroke.
+                    // <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
                     <View> 
                         
                         <TextInput
@@ -195,6 +197,7 @@ export default function Cardform() {
 
                         <TextInput
                             placeholder='Enter phone number'
+                            keyboardType='numeric'
                             onChangeText={props.handleChange('phone')}
                             value={props.values.phone} 
                         /> 
@@ -206,6 +209,7 @@ export default function Cardform() {
   
                         <Button title='submit' onPress={props.handleSubmit} />
                     </View>
+                    // </TouchableWithoutFeedback>
                 )}
             </Formik>
         </View>
