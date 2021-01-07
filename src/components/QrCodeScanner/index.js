@@ -8,8 +8,7 @@ export default function QrCodeScanner({ cardId }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const { data } = useQuery(QUERY_CARD, { variables: { cardId } });
-  console.log(object)
-  const []
+  console.log(data)
 
   useEffect(() => {
     (async () => {
