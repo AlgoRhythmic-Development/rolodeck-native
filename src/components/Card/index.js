@@ -14,12 +14,12 @@ const Card = ({ cardInfo }) => (
   >
     {/* Face Side */}
     <View style={styles.card}>
-      <Text style={styles.title}>{cardInfo.randomInfo.company.name}</Text>
-      <Text style={styles.item}>{cardInfo.randomInfo.company.catchPhrase}</Text>
-      <Text style={styles.item}>{cardInfo.randomInfo.name}</Text>
-      <Text style={styles.item}>{cardInfo.randomInfo.website}</Text>
-      <Text style={styles.item}>{cardInfo.randomInfo.phone}</Text>
-      <Text style={styles.item}>{cardInfo.randomInfo.email}</Text>
+      <Text style={styles.title}>{cardInfo.company.name}</Text>
+      <Text style={styles.item}>{cardInfo.company.catchPhrase}</Text>
+      <Text style={styles.item}>{cardInfo.name}</Text>
+      <Text style={styles.item}>{cardInfo.website}</Text>
+      <Text style={styles.item}>{cardInfo.phone}</Text>
+      <Text style={styles.item}>{cardInfo.email}</Text>
     </View>
     {/* Back Side */}
     <View style={styles.back}>
