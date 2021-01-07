@@ -11,7 +11,8 @@ import { LOG_OUT } from "../utils/actions";
 const Home = ({ route, navigation }) => {
   const { data, loading } = useQuery(QUERY_ME);
   const me = data?.me || [];
-  const card = me?.cards[0];
+
+  const card = me?.cards[0] || [];
   console.log(card);
 
   // const [addCard, { error }] = useMutation(ADD_CARD);
