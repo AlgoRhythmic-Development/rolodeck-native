@@ -7,12 +7,14 @@ import { ADD_CARD } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { useStoreContext } from "../utils/Store";
 import { LOG_OUT } from "../utils/actions";
+// components
+import Card from "../components/Card";
 
 const Home = ({ route, navigation }) => {
   const { data, loading } = useQuery(QUERY_ME);
-  const me = data?.me || [];
+  const me = data?.me || {};
 
-  const card = me?.cards[0] || [];
+  const card = me?.cards[0] || {};
   console.log(card);
 
   // const [addCard, { error }] = useMutation(ADD_CARD);
@@ -39,12 +41,13 @@ const Home = ({ route, navigation }) => {
     <SafeAreaView>
       <StatusBar style="auto" />
       <Text>Hello, {me.username}</Text>
-      <View style={styles.cardContainer}>
+      <Card cardInfo={card} />
+      {/* <View style={styles.cardContainer}>
         <Text style={styles.cardTitle}>{card.name}</Text>
         <Text style={styles.cardText}>{card.jobTitle}</Text>
         <Text style={styles.cardText}>{card.email}</Text>
         <Text style={styles.cardText}>{card.phone}</Text>
-      </View>
+      </View> */}
       <Button title="Log Out" onPress={() => logoutUser()} />
       {/* <Button title="add card" onPress={() => addCard({ variables })} /> */}
     </SafeAreaView>
