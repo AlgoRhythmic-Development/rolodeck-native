@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, SafeAreaView } from 'react-native';
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import { useMutation, useQuery } from '@apollo/client';
-import { QUERY_CARD } from '../../utils/queries';;
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet, Button, SafeAreaView } from "react-native";
+import { BarCodeScanner } from "expo-barcode-scanner";
+import { useMutation, useQuery } from "@apollo/client";
+import { QUERY_CARD } from "../../utils/queries";
 
 export default function QrCodeScanner({ cardId }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const { data } = useQuery(QUERY_CARD, { variables: { cardId } });
-  console.log(object)
-  const []
+  console.log(object);
+  // const []
 
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      setHasPermission(status === "granted");
     })();
   }, []);
 
@@ -39,7 +39,7 @@ export default function QrCodeScanner({ cardId }) {
         style={styles.camera}
       />
       {scanned && (
-        <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />
+        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
       )}
     </SafeAreaView>
   );
@@ -48,11 +48,11 @@ export default function QrCodeScanner({ cardId }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: "column",
+    justifyContent: "center",
   },
   camera: {
-    position: 'absolute',
+    position: "absolute",
     flex: 1,
     top: 50,
     left: 5,
