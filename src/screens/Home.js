@@ -1,16 +1,23 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { Alert, Button, StyleSheet, Text, SafeAreaView } from "react-native";
-import { Link } from "@react-navigation/native";
+import { Button, Text, SafeAreaView, View } from "react-native";
+import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 import { useStoreContext } from "../utils/Store";
-import { LOG_IN, LOG_OUT } from "../utils/actions";
+import { LOG_OUT } from "../utils/actions";
+// components
+import Card from "../components/Card";
+import StatusModal from "../components/StatusModal";
 
 const Home = ({ route, navigation }) => {
-  const [state, dispatch] = useStoreContext();
-
   const [show, setShow] = useState(false);
+  const [status, setStatus] = useState("Success!");
+  const { data, loading } = useQuery(QUERY_ME);
+  const me = data?.me || {};
+  const card = data?.me.cards[0] || {};
+
+  const [state, dispatch] = useStoreContext();
 
   const logoutUser = async () => {
     try {
@@ -22,22 +29,17 @@ const Home = ({ route, navigation }) => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <StatusBar style="auto" />
-      <Text>Welcome to RoloDeck!</Text>
-      <Text>Join a community of business professionals.</Text>
-      <Text>Log in or sign-up to get started!</Text>
+      <Text>Hello, {me.username}</Text>
+      <Card cardInfo={card} />
       <Button
-        title="Get Started"
-        onPress={() => navigation.navigate("Login", { name: "Login" })}
+        style={{ marginTop: "15%" }}
+        title="Log Out"
+        onPress={() => logoutUser()}
       />
-
-      <Button
-        title="Test GraphQL"
-        onPress={() => navigation.navigate("FetchTest")}
-      />
-
-      <Button title="Log Out" onPress={() => logoutUser()} />
+      <StatusModal show={show} setShow={setShow} status={status} />
+      <Button title="test modal" onPress={() => setShow(true)} />
     </SafeAreaView>
   );
 };

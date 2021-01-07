@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Alert,
   Modal,
@@ -8,13 +8,17 @@ import {
   View,
 } from "react-native";
 
-const SuccessModal = ({ show, setShow, status }) => {
-  //     define state and function to change modal visibility
-  //     with the following code in parent component:
+const StatusModal = ({ show, setShow, status }) => {
+  //   Define state and function to change modal visibility
+  //   with the following code in parent component:
+
   //   const [show, setShow] = useState(false);
 
-  //   You'll also need to pass in the status message (either "Success!" or a message indicating an error)
-  //   from the parent as a "status" prop
+  //   You'll also need to pass in the status message (either "Success!"
+  //   or a message indicating an error)
+  //   from the parent as a "status" prop.
+
+  //   See Home screen for usage example
 
   return (
     <View style={styles.centeredView}>
@@ -41,15 +45,6 @@ const SuccessModal = ({ show, setShow, status }) => {
           </View>
         </View>
       </Modal>
-
-      <TouchableHighlight
-        style={styles.openButton}
-        onPress={() => {
-          setShow(true);
-        }}
-      >
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </TouchableHighlight>
     </View>
   );
 };
@@ -63,7 +58,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: "#2EB67D",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
@@ -84,13 +79,16 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: "white",
-    fontWeight: "bold",
+    // fontWeight: "bold",
     textAlign: "center",
   },
   modalText: {
-    marginBottom: 15,
+    color: "white",
+    fontSize: 50,
+    fontWeight: "bold",
+    marginVertical: 100,
     textAlign: "center",
   },
 });
 
-export default SuccessModal;
+export default StatusModal;

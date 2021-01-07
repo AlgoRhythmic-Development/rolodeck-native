@@ -52,8 +52,8 @@ export const QUERY_MY_COLLECTION = gql`
 `;
 
 export const QUERY_USER = gql`
-  query user($username: String!) {
-    user(username: $username) {
+  query user($_id: ID!) {
+    user(_id: $_id) {
       _id
       username
       email
