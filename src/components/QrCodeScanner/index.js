@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button, SafeAreaView } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { useMutation, useQuery } from '@apollo/client';
-import { QUERY_CARD } from '../../utils/queries';
+import { QUERY_CARD } from '../../utils/queries';;
 
 export default function QrCodeScanner({ cardId }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const { data } = useQuery(QUERY_CARD, { variables: { cardId } });
+  console.log(object)
+  const []
 
   useEffect(() => {
     (async () => {
@@ -19,6 +21,8 @@ export default function QrCodeScanner({ cardId }) {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    // mutate the collection to have that card in it
+    //"{id: jasldhgpa9erbasvnlkasjj, username: jake, businessName: Lendio}"
   };
 
   if (hasPermission === null) {
