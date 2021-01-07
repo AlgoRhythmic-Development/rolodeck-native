@@ -14,7 +14,7 @@ const Home = ({ route, navigation }) => {
   const { data, loading } = useQuery(QUERY_ME);
   const me = data?.me || {};
 
-  const card = me?.cards[0] || {};
+  const card = data?.me.cards[0] || {};
 
   const [state, dispatch] = useStoreContext();
 
