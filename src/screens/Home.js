@@ -18,6 +18,7 @@ const Home = ({ route, navigation }) => {
   const me = meData?.me || {};
   const card = meData?.me.cards[0] || {};
 
+<<<<<<< HEAD
   // ***************START OF MODAL USAGE EXAMPLE*********************
 
   // show/setShow determine modal visibility
@@ -62,6 +63,9 @@ const Home = ({ route, navigation }) => {
   // see return jsx for <StatusModal> and props
 
   // *********************END OF MODAL USAGE EXAMPLE*************************
+=======
+  const card = data?.me.cards[0] || {};
+>>>>>>> main
 
   const [state, dispatch] = useStoreContext();
 
