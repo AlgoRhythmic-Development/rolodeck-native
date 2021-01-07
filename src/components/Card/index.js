@@ -14,10 +14,13 @@ const Card = ({ cardInfo }) => (
   >
     {/* Face Side */}
     <View style={styles.card}>
-      {/* <Text style={styles.title}>{cardInfo.company.name}</Text>
-      <Text style={styles.item}>{cardInfo.company.catchPhrase}</Text> */}
+      {cardInfo.companyName && (
+        <Text style={styles.title}>{cardInfo.companyName}</Text>
+      )}
+      {cardInfo.tagline && <Text style={styles.item}>{cardInfo.tagline}</Text>}
       <Text style={styles.item}>{cardInfo.name}</Text>
-      {/* <Text style={styles.item}>{cardInfo.website}</Text> */}
+      <Text style={styles.item}>{cardInfo.jobTitle}</Text>
+      {cardInfo.website && <Text style={styles.item}>{cardInfo.website}</Text>}
       <Text style={styles.item}>{cardInfo.phone}</Text>
       <Text style={styles.item}>{cardInfo.email}</Text>
     </View>

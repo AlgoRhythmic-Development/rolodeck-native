@@ -15,16 +15,6 @@ const Home = ({ route, navigation }) => {
   const me = data?.me || {};
 
   const card = me?.cards[0] || {};
-  console.log(card);
-
-  // const [addCard, { error }] = useMutation(ADD_CARD);
-
-  // const variables = {
-  //   name: "Taylor Remigi",
-  //   jobTitle: "Full Stack Web Developer",
-  //   phone: "385-424-8121",
-  //   email: "tayremigi@gmail.com",
-  // };
 
   const [state, dispatch] = useStoreContext();
 
@@ -41,34 +31,18 @@ const Home = ({ route, navigation }) => {
     <SafeAreaView>
       <StatusBar style="auto" />
       <Text>Hello, {me.username}</Text>
-      <Card cardInfo={card} />
-      {/* <View style={styles.cardContainer}>
-        <Text style={styles.cardTitle}>{card.name}</Text>
-        <Text style={styles.cardText}>{card.jobTitle}</Text>
-        <Text style={styles.cardText}>{card.email}</Text>
-        <Text style={styles.cardText}>{card.phone}</Text>
-      </View> */}
-      <Button title="Log Out" onPress={() => logoutUser()} />
-      {/* <Button title="add card" onPress={() => addCard({ variables })} /> */}
+      <View style={{ marginTop: "15%" }}>
+        <Card cardInfo={card} />
+      </View>
+      <View>
+        <Button
+          style={{ marginTop: "15%" }}
+          title="Log Out"
+          onPress={() => logoutUser()}
+        />
+      </View>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  cardContainer: {
-    margin: 20,
-    padding: 15,
-    backgroundColor: "green",
-  },
-  cardTitle: {
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "red",
-  },
-  cardText: {
-    textAlign: "center",
-    color: "purple",
-  },
-});
 
 export default Home;
