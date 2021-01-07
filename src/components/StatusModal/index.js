@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 
-const StatusModal = ({ show, setShow, status }) => {
+const StatusModal = ({ show, setShow, status, data }) => {
   //   Define state and function to change modal visibility
   //   with the following code in parent component:
 
@@ -16,10 +16,16 @@ const StatusModal = ({ show, setShow, status }) => {
 
   //   You'll also need to pass in the status message (either "Success!"
   //   or a message indicating an error)
-  //   from the parent as a "status" prop.
+  //   from the parent as a "status" prop:
+  //   const [status, setStatus] = useState("Success!");
+
+  //   Finally, you can also pass the modal a "data" prop with any other
+  //   information or data you want displayed beneath the status message.
+  //   This may need tweaking down the road but I thought it may be useful
+  //   for displaying cards, search results etc.
+  //   const [modalData, setModalData] = useState({});
 
   //   See Home screen for usage example
-
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -33,7 +39,7 @@ const StatusModal = ({ show, setShow, status }) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>{status}</Text>
-
+            {data && <Text style={styles.modalText}>{data}</Text>}
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
               onPress={() => {
