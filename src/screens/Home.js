@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { Alert, Button, StyleSheet, Text, SafeAreaView } from "react-native";
 import { Link } from "@react-navigation/native";
 import { QUERY_ME } from "../utils/queries";
@@ -9,6 +9,8 @@ import { LOG_IN, LOG_OUT } from "../utils/actions";
 
 const Home = ({ route, navigation }) => {
   const [state, dispatch] = useStoreContext();
+
+  const [show, setShow] = useState(false);
 
   const logoutUser = async () => {
     try {
