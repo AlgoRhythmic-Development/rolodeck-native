@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Alert, Button, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Alert, Button, Keyboard, SafeAreaView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import CardForm from "../components/CardForm";
 
 const Create = ({route, navigation}) => {
@@ -12,13 +12,14 @@ const Create = ({route, navigation}) => {
     // }
 
     return (
-        <View>
-            <StatusBar style="auto" />
+        <SafeAreaView>
             <Text>Create a Business Card</Text> 
-            <View>
-                <CardForm />
-            </View>   
-        </View>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View>
+                    <CardForm />
+                </View>
+            </TouchableWithoutFeedback>   
+        </SafeAreaView>
     )   
 };
 

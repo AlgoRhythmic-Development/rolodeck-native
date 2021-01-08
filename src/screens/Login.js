@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { useStoreContext } from "../utils/Store";
 import { LOG_IN, LOG_OUT } from "../utils/actions";
-import { Button, Text, TextInput, View, SafeAreaView } from "react-native";
+import { Button, Keyboard, Text, TextInput, TouchableWithoutFeedback, View, SafeAreaView } from "react-native";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
@@ -51,36 +51,41 @@ export default function Login() {
 
 return (
     <SafeAreaView>
-        <Text>Login</Text>
-        <Formik
-            initialValues={{ email: '', password: '' }}
-            onSubmit={(values, actions) => {
-                actions.resetForm();
-                handleFormSubmit({ values });
-            }}
-        >
-            {(props) => (
-                <View> 
-                    <TextInput
-                        name='email'
-                        id='email'
-                        textContentType='emailAddress'
-                        placeholder='Email Address'
-                        onChangeText={props.handleChange('email')}
-                        value={props.values.email}
-                    />
-                    <TextInput
-                        name='password'
-                        id='password'
-                        placeholder='Password'
-                        secureTextEntry={true}
-                        onChangeText={props.handleChange('password')}
-                        value={props.values.password}
-                    />
-                    <Button title='submit' onPress={props.handleSubmit} />
-                </View>
-            )}
-        </Formik>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View>
+            <Text>Login</Text>
+            <Formik
+                initialValues={{ email: '', password: '' }}
+                onSubmit={(values, actions) => {
+                    actions.resetForm();
+                    handleFormSubmit({ values });
+                }}
+            >
+                {(props) => (
+                    <View> 
+                        <TextInput
+                            name='email'
+                            id='email'
+                            textContentType='emailAddress'
+                            autoCapitalize='none'
+                            placeholder='Email Address'
+                            onChangeText={props.handleChange('email')}
+                            value={props.values.email}
+                        />
+                        <TextInput
+                            name='password'
+                            id='password'
+                            placeholder='Password'
+                            secureTextEntry={true}
+                            onChangeText={props.handleChange('password')}
+                            value={props.values.password}
+                        />
+                        <Button title='submit' onPress={props.handleSubmit} />
+                    </View>
+                )}
+            </Formik>
+        </View>
+        </TouchableWithoutFeedback>
     </SafeAreaView>
 )
 };

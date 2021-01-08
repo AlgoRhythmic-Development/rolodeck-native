@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Button, StyleSheet, Text, TextInput, View, SafeAreaView } from 'react-native';
+import { Alert, Button, Keyboard, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View, SafeAreaView } from 'react-native';
 import { StatusBar } from "expo-status-bar";
 import { Link } from '@react-navigation/native';
 import { Formik } from 'formik';
@@ -35,6 +35,8 @@ export default function SignupScreen() {
 
   return (
     <SafeAreaView>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View>
       <Text>Signup</Text>
       <Formik
         initialValues={{ username: '', email: '', password: '' }}
@@ -71,6 +73,8 @@ export default function SignupScreen() {
           </View>
         )}
       </Formik>
+      </View>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   )
 }

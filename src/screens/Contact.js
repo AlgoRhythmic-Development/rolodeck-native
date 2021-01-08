@@ -1,6 +1,6 @@
 import React from 'react';
 // import ContactForm from '../components/ContactForm';
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 import { Formik } from 'formik';
 
  // this form will need styles from a global styles sheet.
@@ -8,11 +8,14 @@ import { Formik } from 'formik';
 
     // this is where we'll need to pass the login data to the email handler. 
     return(
-        <View>
+        <SafeAreaView>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View>
             <Text>Contact Us</Text>
             <Text>Fill out the form below to contact us. We'd love to hear your questions, feedback, and ideas. 
                 After submiting this form, we will contact you as soon as possible. 
             </Text>
+            
             <Formik
                 initialValues={{ 
                     firstName: '', 
@@ -76,6 +79,9 @@ import { Formik } from 'formik';
                     </View>
                 )}
             </Formik>
-        </View>
+            
+            </View>
+            </TouchableWithoutFeedback>
+        </SafeAreaView>
     )
   }
