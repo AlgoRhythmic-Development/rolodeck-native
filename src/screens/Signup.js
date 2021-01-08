@@ -46,16 +46,22 @@ export default function SignupScreen() {
         {(props) => (
           <View>
             <TextInput
+              name='username'
+              id='username'
               placeholder='Enter a username'
               onChangeText={props.handleChange('username')}
               value={props.values.username}
             />
             <TextInput
+              name='email'
+              id='email'
               placeholder='Enter your email'
               onChangeText={props.handleChange('email')}
               value={props.values.email}
             />
             <TextInput
+              name='password'
+              id='password'
               placeholder='Create a password'
               secureTextEntry={true}
               onChangeText={props.handleChange('password')}

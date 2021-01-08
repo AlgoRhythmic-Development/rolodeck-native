@@ -60,14 +60,19 @@ return (
             }}
         >
             {(props) => (
-                <View>
+                <View> 
                     <TextInput
-                        placeholder='Enter your email'
+                        name='email'
+                        id='email'
+                        textContentType='emailAddress'
+                        placeholder='Email Address'
                         onChangeText={props.handleChange('email')}
                         value={props.values.email}
                     />
                     <TextInput
-                        placeholder='Create a password'
+                        name='password'
+                        id='password'
+                        placeholder='Password'
                         secureTextEntry={true}
                         onChangeText={props.handleChange('password')}
                         value={props.values.password}
