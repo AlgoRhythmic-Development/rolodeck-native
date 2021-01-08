@@ -15,8 +15,6 @@ export default function Login() {
 
   const prevLoginCheck = async () => {
     const check = await Auth.loggedIn();
-    console.log("check:");
-    console.log(check);
     if (check) {
       dispatch({ type: LOG_IN });
     }

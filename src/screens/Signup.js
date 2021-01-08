@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { Alert, Button, StyleSheet, Text, TextInput, View, SafeAreaView } from 'react-native';
+import {
+  Alert,
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  SafeAreaView,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { Link } from '@react-navigation/native';
-import { Formik } from 'formik';
+import { Link } from "@react-navigation/native";
+import { Formik } from "formik";
 import { useStoreContext } from "../utils/Store";
 import { LOG_IN } from "../utils/actions";
 import { useMutation } from "@apollo/client";
@@ -11,9 +19,8 @@ import Auth from "../utils/auth";
 
 // this form will need styles from a global styles sheet.
 export default function SignupScreen() {
-
   const [state, dispatch] = useStoreContext();
-  
+
   // this is where we'll need to pass the sign up data to the back end.
   const [addUser, { error }] = useMutation(ADD_USER);
 
@@ -22,7 +29,6 @@ export default function SignupScreen() {
       const { data } = await addUser({
         variables: { ...values },
       });
-      console.log(data);
       await Auth.login(data.addUser.token);
       dispatch({ type: LOG_IN });
     } catch (e) {
@@ -37,7 +43,7 @@ export default function SignupScreen() {
     <SafeAreaView>
       <Text>Signup</Text>
       <Formik
-        initialValues={{ username: '', email: '', password: '' }}
+        initialValues={{ username: "", email: "", password: "" }}
         onSubmit={(values, actions) => {
           actions.resetForm();
           handleFormSubmit({ values });
@@ -46,28 +52,27 @@ export default function SignupScreen() {
         {(props) => (
           <View>
             <TextInput
-              placeholder='Enter a username'
-              onChangeText={props.handleChange('username')}
+              placeholder="Enter a username"
+              onChangeText={props.handleChange("username")}
               value={props.values.username}
             />
             <TextInput
-              placeholder='Enter your email'
-              onChangeText={props.handleChange('email')}
+              placeholder="Enter your email"
+              onChangeText={props.handleChange("email")}
               value={props.values.email}
             />
             <TextInput
-              placeholder='Create a password'
-              onChangeText={props.handleChange('password')}
+              placeholder="Create a password"
+              onChangeText={props.handleChange("password")}
               value={props.values.password}
             />
-            <Button title='Submit' onPress={props.handleSubmit} />
+            <Button title="Submit" onPress={props.handleSubmit} />
           </View>
         )}
       </Formik>
     </SafeAreaView>
-  )
+  );
 }
-
 
 // const SignupScreen = () => {
 //   // const [formState, setFormState] = useState({
@@ -108,6 +113,5 @@ export default function SignupScreen() {
 //       color: 'blue'
 //   }
 // })
-
 
 // export default SignupScreen;

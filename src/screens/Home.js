@@ -9,12 +9,13 @@ import { LOG_OUT } from "../utils/actions";
 // components
 import Card from "../components/Card";
 import StatusModal from "../components/StatusModal";
+import Loading from "../screens/Loading";
 
 const Home = ({ route, navigation }) => {
   // Since we're working with multiple queries in one functional component,
   // we need to give our destructured data properties different names
   // or it will throw an error saying data is already defined
-  const { data: meData } = useQuery(QUERY_ME);
+  const { data: meData, loading: meLoading } = useQuery(QUERY_ME);
   const me = meData?.me || {};
   const card = meData?.me.cards[0] || {};
 
@@ -31,36 +32,24 @@ const Home = ({ route, navigation }) => {
   // under the status message
   const [modalData, setModalData] = useState("");
 
-  // set up a lazyQuery which will run at beginning of
-  // handlePress() function call
-  const [queryUsers, { data: userData, loading }] = useLazyQuery(QUERY_USERS);
-
-  // handling state updates for the modal seems to work best
-  // when done asynchronously so that everything is certainly
-  // ready before "show" is set to true
-  const handlePress = async () => {
-    // run our lazy query and define a variable from the first user object's
-    // username property
-    let user;
-    await queryUsers();
-    (await userData) ? (user = userData?.users[0].username) : (user = "");
-
-    // if task was successful, set status to "Success!",
-    // set modalData to the user const defined above,
-    // and set show to true, triggering the modal to become
-    // visible
-    if (userData) {
-      await setModalStatus("Success!");
-      await setModalData(user);
-      return setShow(true);
-    } else {
-      // if unsuccessful, set status to inform user of what happened
-      // then set show to true
-      await setModalStatus("No user data");
-      await setModalData("");
-      return setShow(true);
-    }
-  };
+  // set up a lazyQuery which will run a callback function
+  // setting our modal state
+  // *** this query is not necessary for this screen so this is
+  // for demo purposes only***
+  const [queryUsers, { data, error }] = useLazyQuery(QUERY_USERS, {
+    onCompleted: (data) => {
+      if (!error) {
+        setModalStatus("Success!");
+        const user = data.users[0].username;
+        setModalData(user);
+        setShow(true);
+      } else {
+        setModalStatus("Error");
+        setModalData("Couldn't fetch user data...");
+        setShow(true);
+      }
+    },
+  });
 
   // see return jsx for <StatusModal> and props
 
@@ -81,7 +70,7 @@ const Home = ({ route, navigation }) => {
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar style="auto" />
       <Text>Hello, {me.username}</Text>
-      <Card cardInfo={card} />
+      {meLoading ? <Loading /> : <Card cardInfo={card} />}
       <Button
         style={{ marginTop: "15%" }}
         title="Log Out"
@@ -93,10 +82,7 @@ const Home = ({ route, navigation }) => {
         status={modalStatus}
         data={modalData}
       />
-      <Button
-        title="Query Users and Test Modal"
-        onPress={() => handlePress()}
-      />
+      <Button title="Query Users and Test Modal" onPress={() => queryUsers()} />
     </SafeAreaView>
   );
 };

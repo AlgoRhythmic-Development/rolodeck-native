@@ -26,8 +26,6 @@ const StatusModal = ({ show, setShow, status, data }) => {
   //   const [modalData, setModalData] = useState({});
 
   //   See Home screen for usage example
-  console.log("modal data:");
-  console.log(data);
   return (
     <View style={styles.centeredView}>
       <Modal
