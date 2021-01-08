@@ -1,13 +1,21 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Alert, Button, StyleSheet, Text, SafeAreaView } from "react-native";
-import { Link } from "@react-navigation/native";
+import { Button, Text, SafeAreaView, View, StyleSheet } from "react-native";
+import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
+import { ADD_CARD } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { useStoreContext } from "../utils/Store";
-import { LOG_IN, LOG_OUT } from "../utils/actions";
+import { LOG_OUT } from "../utils/actions";
+// components
+import Card from "../components/Card";
 
 const Home = ({ route, navigation }) => {
+  const { data, loading } = useQuery(QUERY_ME);
+  const me = data?.me || {};
+
+  const card = data?.me.cards[0] || {};
+
   const [state, dispatch] = useStoreContext();
 
   const logoutUser = async () => {
@@ -22,20 +30,17 @@ const Home = ({ route, navigation }) => {
   return (
     <SafeAreaView>
       <StatusBar style="auto" />
-      <Text>Welcome to RoloDeck!</Text>
-      <Text>Join a community of business professionals.</Text>
-      <Text>Log in or sign-up to get started!</Text>
-      <Button
-        title="Get Started"
-        onPress={() => navigation.navigate("Login", { name: "Login" })}
-      />
-
-      <Button
-        title="Test GraphQL"
-        onPress={() => navigation.navigate("FetchTest")}
-      />
-
-      <Button title="Log Out" onPress={() => logoutUser()} />
+      <Text>Hello, {me.username}</Text>
+      <View style={{ marginTop: "15%" }}>
+        <Card cardInfo={card} />
+      </View>
+      <View>
+        <Button
+          style={{ marginTop: "15%" }}
+          title="Log Out"
+          onPress={() => logoutUser()}
+        />
+      </View>
     </SafeAreaView>
   );
 };
