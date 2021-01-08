@@ -57,9 +57,9 @@ export default function SignupScreen() {
             />
             <TextInput
               placeholder='Create a password'
+              secureTextEntry={true}
               onChangeText={props.handleChange('password')}
               value={props.values.password}
-              // secureTextEntry={true}
             />
             <Button title='Submit' onPress={props.handleSubmit} />
           </View>

@@ -166,42 +166,56 @@ export default function Cardform() {
                     <View> 
                         
                         <TextInput
+                            name="companyName"
+                            id="companyName"
                             placeholder='Enter company name'
                             onChangeText={props.handleChange('companyName')}
                             value={props.values.companyName} 
                         /> 
 
                         <TextInput
+                            name="tagline"
+                            id="tagline"
                             placeholder='Enter tagline'
                             onChangeText={props.handleChange('tagline')}
                             value={props.values.tagline} 
                         /> 
 
                         <TextInput
+                            name='name'
+                            id='name'
                             placeholder='Enter Full Name'
                             onChangeText={props.handleChange('name')}
                             value={props.values.name} 
                         /> 
 
                         <TextInput
+                            name='jobTitle'
+                            id='jobTitle'
                             placeholder='Enter Job Title'
                             onChangeText={props.handleChange('jobTitle')}
                             value={props.values.jobTitle} 
                         /> 
 
                         <TextInput
+                            name='website'
+                            id='website'
                             placeholder='Enter Website'
                             onChangeText={props.handleChange('website')}
                             value={props.values.website} 
                         /> 
 
                         <TextInput
+                            name='phone'
+                            id='phone'
                             placeholder='Enter phone number'
                             keyboardType='numeric'
                             onChangeText={props.handleChange('phone')}
                             value={props.values.phone} 
                         /> 
                         <TextInput
+                            name='email'
+                            id='email'
                             placeholder='Enter your email address'
                             onChangeText={props.handleChange('email')}
                             value={props.values.email} 
