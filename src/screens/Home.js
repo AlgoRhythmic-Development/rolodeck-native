@@ -18,15 +18,14 @@ const Home = ({ route, navigation }) => {
   const me = meData?.me || {};
   const card = meData?.me.cards[0] || {};
 
-<<<<<<< HEAD
   // ***************START OF MODAL USAGE EXAMPLE*********************
 
   // show/setShow determine modal visibility
   const [show, setShow] = useState(false);
 
-  // status is a message that is passed through props
+  // modalStatus is a message that is passed through props
   // to be displayed in modal
-  const [status, setStatus] = useState("Success!");
+  const [modalStatus, setModalStatus] = useState("");
 
   // modalData is any other data you want passed to the modal and displayed
   // under the status message
@@ -34,7 +33,7 @@ const Home = ({ route, navigation }) => {
 
   // set up a lazyQuery which will run at beginning of
   // handlePress() function call
-  const [queryUsers, { data: userData }] = useLazyQuery(QUERY_USERS);
+  const [queryUsers, { data: userData, loading }] = useLazyQuery(QUERY_USERS);
 
   // handling state updates for the modal seems to work best
   // when done asynchronously so that everything is certainly
@@ -42,20 +41,23 @@ const Home = ({ route, navigation }) => {
   const handlePress = async () => {
     // run our lazy query and define a variable from the first user object's
     // username property
-    queryUsers();
-    const user = userData?.users[0].username || {};
-    // if user in't undefined, set status to "Success!",
+    let user;
+    await queryUsers();
+    (await userData) ? (user = userData?.users[0].username) : (user = "");
+
+    // if task was successful, set status to "Success!",
     // set modalData to the user const defined above,
     // and set show to true, triggering the modal to become
     // visible
-    if (user) {
-      await setStatus("Success!");
+    if (userData) {
+      await setModalStatus("Success!");
       await setModalData(user);
       return setShow(true);
     } else {
-      // if user is undefined, set status to inform user of what happened
+      // if unsuccessful, set status to inform user of what happened
       // then set show to true
-      await setStatus("No user data");
+      await setModalStatus("No user data");
+      await setModalData("");
       return setShow(true);
     }
   };
@@ -63,9 +65,6 @@ const Home = ({ route, navigation }) => {
   // see return jsx for <StatusModal> and props
 
   // *********************END OF MODAL USAGE EXAMPLE*************************
-=======
-  const card = data?.me.cards[0] || {};
->>>>>>> main
 
   const [state, dispatch] = useStoreContext();
 
@@ -91,7 +90,7 @@ const Home = ({ route, navigation }) => {
       <StatusModal
         show={show}
         setShow={setShow}
-        status={status}
+        status={modalStatus}
         data={modalData}
       />
       <Button

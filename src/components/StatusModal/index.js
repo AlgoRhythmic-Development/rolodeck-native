@@ -17,7 +17,7 @@ const StatusModal = ({ show, setShow, status, data }) => {
   //   You'll also need to pass in the status message (either "Success!"
   //   or a message indicating an error)
   //   from the parent as a "status" prop:
-  //   const [status, setStatus] = useState("Success!");
+  //   const [modalStatus, setModalStatus] = useState("Success!");
 
   //   Finally, you can also pass the modal a "data" prop with any other
   //   information or data you want displayed beneath the status message.
@@ -26,6 +26,8 @@ const StatusModal = ({ show, setShow, status, data }) => {
   //   const [modalData, setModalData] = useState({});
 
   //   See Home screen for usage example
+  console.log("modal data:");
+  console.log(data);
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -39,7 +41,7 @@ const StatusModal = ({ show, setShow, status, data }) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>{status}</Text>
-            {data && <Text style={styles.modalText}>{data}</Text>}
+            <Text style={styles.modalText}>{data}</Text>
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
               onPress={() => {
