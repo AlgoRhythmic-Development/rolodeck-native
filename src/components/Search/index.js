@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useLazyQuery } from "@apollo/react-hooks";
-import { QUERY_USER_CARDS } from "../../utils/queries";
-import { Form, Button } from "react-bootstrap";
+import { Alert, Button, StatusBar, Text, TextInput, View } from "react-native";
+import { useLazyQuery } from "@apollo/client";
+import { QUERY_USER_CARDS } from "src/utils/queries.js";
 import ResultsModal from "../SearchResultsModal";
-import QrButton from "../QrButton";
 
 const Search = ({ addCollectedCard, collectedCards }) => {
   const [searchCards, { data }] = useLazyQuery(QUERY_USER_CARDS);
@@ -57,7 +56,7 @@ const Search = ({ addCollectedCard, collectedCards }) => {
   };
 
   return (
-    <div className="col-12">
+    <View>
       <ResultsModal
         show={show}
         setShow={setShow}
@@ -65,24 +64,19 @@ const Search = ({ addCollectedCard, collectedCards }) => {
         addCollectedCard={addCollectedCard}
       />
 
-      <Form inline className="col-12 p-0 border-0" onSubmit={handleSubmit}>
+      <Form inline onSubmit={handleSubmit}>
         <Form.Label htmlFor="nameInput" srOnly>
           Name
         </Form.Label>
         <Form.Control
-          className="mb-2 mr-lg-2 mt-0 searchbar"
           id="nameInput"
           placeholder="Enter a name to search for cards"
         />
-        <Button type="submit" className="mb-2 mt-2 btn-border">
+        <Button type="submit">
           Search
         </Button>
       </Form>
-      <p className="text-center">or</p>
-      <QrButton className="col-11 mb-3" style={{ width: "90%" }}>
-        Scan Code
-      </QrButton>
-    </div>
+    </View>
   );
 };
 
