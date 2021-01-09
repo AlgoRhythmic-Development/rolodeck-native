@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  Alert,
-  Button,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  SafeAreaView,
-} from "react-native";
+import { Alert, Button, Keyboard, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View, SafeAreaView } from 'react-native';
 import { StatusBar } from "expo-status-bar";
 import { Link } from "@react-navigation/native";
 import { Formik } from "formik";
@@ -41,6 +33,8 @@ export default function SignupScreen() {
 
   return (
     <SafeAreaView>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View>
       <Text>Signup</Text>
       <Formik
         initialValues={{ username: "", email: "", password: "" }}
@@ -52,24 +46,33 @@ export default function SignupScreen() {
         {(props) => (
           <View>
             <TextInput
-              placeholder="Enter a username"
-              onChangeText={props.handleChange("username")}
+              name='username'
+              id='username'
+              placeholder='Enter a username'
+              onChangeText={props.handleChange('username')}
               value={props.values.username}
             />
             <TextInput
-              placeholder="Enter your email"
-              onChangeText={props.handleChange("email")}
+              name='email'
+              id='email'
+              placeholder='Enter your email'
+              onChangeText={props.handleChange('email')}
               value={props.values.email}
             />
             <TextInput
-              placeholder="Create a password"
-              onChangeText={props.handleChange("password")}
+              name='password'
+              id='password'
+              placeholder='Create a password'
+              secureTextEntry={true}
+              onChangeText={props.handleChange('password')}
               value={props.values.password}
             />
             <Button title="Submit" onPress={props.handleSubmit} />
           </View>
         )}
       </Formik>
+      </View>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 }
