@@ -122,8 +122,8 @@ export const QUERY_CARDS = gql`
 `;
 
 export const QUERY_CARD = gql`
-  query card($id: ID!) {
-    card(_id: $id) {
+  query card($_id: ID!) {
+    card(_id: $_id) {
       _id
       logoUrl
       companyName

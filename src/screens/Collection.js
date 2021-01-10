@@ -5,7 +5,7 @@ import {
   QUERY_CARDS,
   QUERY_MY_COLLECTION,
   QUERY_CARD,
-  QUERY_USER,
+  QUERY_USERS,
 } from '../utils/queries';
 import { FlatList } from 'react-native-gesture-handler';
 import Card from '../components/Card';
@@ -23,7 +23,7 @@ const Collection = () => {
   // }
 
   const username = 'Minnie Schaefer';
-  const { data } = useQuery(QUERY_USER, { variables: username });
+  const { data } = useQuery(QUERY_USERS)
   console.log(data)
 
   const renderItem = ({ item }) => <Card card={item} />;
