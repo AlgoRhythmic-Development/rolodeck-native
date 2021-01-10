@@ -70,7 +70,7 @@ const Home = ({ route, navigation }) => {
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar style="auto" />
       <Text>Hello, {me.username}</Text>
-      {meLoading ? <Loading /> : <Card cardInfo={card} />}
+      {meLoading ? <Loading /> : <Card isHome={true} cardInfo={card} />}
       <Button
         style={{ marginTop: "15%" }}
         title="Log Out"
