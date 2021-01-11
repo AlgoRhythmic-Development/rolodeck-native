@@ -11,12 +11,13 @@ import {
   StyleSheet,
 } from "react-native";
 import { Formik } from "formik";
+import AnimatedLoader from "react-native-animated-loader";
 import { useMutation } from "@apollo/client";
 import { QUERY_ME, QUERY_CARDS } from "../../utils/queries";
 import { UPDATE_CARD } from "../../utils/mutations";
 
 export default function EditCardform({ cardData }) {
-  const [updateCard, { error }] = useMutation(UPDATE_CARD, {
+  const [updateCard, { error, loading }] = useMutation(UPDATE_CARD, {
     update(cache, { data: { updateCard } }) {
       //   try {
       //     //could potentially not exist yet, so wrap in a try...catch
@@ -36,7 +37,7 @@ export default function EditCardform({ cardData }) {
           data: { me: { ...me, cards: [...me.cards] } },
         });
       } catch (e) {
-        console.error(e);
+        console.error(error);
       }
     },
   });
@@ -54,97 +55,113 @@ export default function EditCardform({ cardData }) {
 
   return (
     <SafeAreaView>
-      <Formik
-        initialValues={{
-          companyName: cardData.companyName,
-          tagline: cardData.tagline,
-          name: cardData.name,
-          jobTitle: cardData.jobTitle,
-          website: cardData.website,
-          phone: cardData.phone,
-          email: cardData.email,
-        }}
-        onSubmit={(values, actions) => {
-          actions.resetForm();
-          handleFormSubmit({ values });
-        }}
-      >
-        {(props) => (
-          // this one does close the keyboard but after every keystroke.
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
-            <View style={styles.formContainer}>
-              <TextInput
-                style={styles.formInput}
-                name="companyName"
-                id="companyName"
-                placeholder="Enter company name"
-                onChangeText={props.handleChange("companyName")}
-                value={props.values.companyName}
-              />
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
+        <View>
+          {loading ? (
+            <AnimatedLoader
+              visible={true}
+              source={require("../../assets/lottie/teal-spinner.json")}
+              animationStyle={{
+                width: 200,
+                height: 200,
+              }}
+              speed={1}
+            />
+          ) : (
+            <Formik
+              initialValues={{
+                companyName: cardData.companyName,
+                tagline: cardData.tagline,
+                name: cardData.name,
+                jobTitle: cardData.jobTitle,
+                website: cardData.website,
+                phone: cardData.phone,
+                email: cardData.email,
+              }}
+              onSubmit={(values, actions) => {
+                handleFormSubmit({ values });
+                // actions.resetForm();
+              }}
+            >
+              {(props) => (
+                // this one does close the keyboard but after every keystroke.
+                <View style={styles.formContainer}>
+                  <TextInput
+                    style={styles.formInput}
+                    name="companyName"
+                    id="companyName"
+                    placeholder="Enter company name"
+                    onChangeText={props.handleChange("companyName")}
+                    value={props.values.companyName}
+                  />
 
-              <TextInput
-                style={styles.formInput}
-                name="tagline"
-                id="tagline"
-                placeholder="Enter tagline"
-                onChangeText={props.handleChange("tagline")}
-                value={props.values.tagline}
-              />
+                  <TextInput
+                    style={styles.formInput}
+                    name="tagline"
+                    id="tagline"
+                    placeholder="Enter tagline"
+                    onChangeText={props.handleChange("tagline")}
+                    value={props.values.tagline}
+                  />
 
-              <TextInput
-                style={styles.formInput}
-                name="name"
-                id="name"
-                placeholder="Enter Full Name"
-                onChangeText={props.handleChange("name")}
-                value={props.values.name}
-              />
+                  <TextInput
+                    style={styles.formInput}
+                    name="name"
+                    id="name"
+                    placeholder="Enter Full Name"
+                    onChangeText={props.handleChange("name")}
+                    value={props.values.name}
+                  />
 
-              <TextInput
-                style={styles.formInput}
-                name="jobTitle"
-                id="jobTitle"
-                placeholder="Enter Job Title"
-                onChangeText={props.handleChange("jobTitle")}
-                value={props.values.jobTitle}
-              />
+                  <TextInput
+                    style={styles.formInput}
+                    name="jobTitle"
+                    id="jobTitle"
+                    placeholder="Enter Job Title"
+                    onChangeText={props.handleChange("jobTitle")}
+                    value={props.values.jobTitle}
+                  />
 
-              <TextInput
-                style={styles.formInput}
-                name="website"
-                id="website"
-                placeholder="Enter Website"
-                onChangeText={props.handleChange("website")}
-                value={props.values.website}
-              />
+                  <TextInput
+                    style={styles.formInput}
+                    name="website"
+                    id="website"
+                    placeholder="Enter Website"
+                    onChangeText={props.handleChange("website")}
+                    value={props.values.website}
+                  />
 
-              <TextInput
-                style={styles.formInput}
-                name="phone"
-                id="phone"
-                placeholder="Enter phone number"
-                keyboardType="numeric"
-                onChangeText={props.handleChange("phone")}
-                value={props.values.phone}
-              />
-              <TextInput
-                style={styles.formInput}
-                name="email"
-                id="email"
-                placeholder="Enter your email address"
-                onChangeText={props.handleChange("email")}
-                value={props.values.email}
-              />
-              <TouchableHighlight
-                style={{ ...styles.submitButton }}
-                onPress={props.handleSubmit}
-              >
-                <Text style={{ ...styles.submitButton }}>Submit Changes</Text>
-              </TouchableHighlight>
-            </View>
-          </TouchableWithoutFeedback>
-        )}
-      </Formik>
+                  <TextInput
+                    style={styles.formInput}
+                    name="phone"
+                    id="phone"
+                    placeholder="Enter phone number"
+                    keyboardType="numeric"
+                    onChangeText={props.handleChange("phone")}
+                    value={props.values.phone}
+                  />
+                  <TextInput
+                    style={styles.formInput}
+                    name="email"
+                    id="email"
+                    placeholder="Enter your email address"
+                    onChangeText={props.handleChange("email")}
+                    value={props.values.email}
+                  />
+                  <TouchableHighlight
+                    style={{ ...styles.submitButton }}
+                    onPress={props.handleSubmit}
+                  >
+                    <Text style={{ ...styles.submitButton }}>
+                      Submit Changes
+                    </Text>
+                  </TouchableHighlight>
+                </View>
+              )}
+            </Formik>
+          )}
+        </View>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 }

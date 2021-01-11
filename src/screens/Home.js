@@ -6,10 +6,10 @@ import { QUERY_ME, QUERY_USERS } from "../utils/queries";
 import Auth from "../utils/auth";
 import { useStoreContext } from "../utils/Store";
 import { LOG_OUT } from "../utils/actions";
+import AnimatedLoader from "react-native-animated-loader";
 // components
 import Card from "../components/Card";
 import StatusModal from "../components/StatusModal";
-import Loading from "../screens/Loading";
 
 const Home = ({ route, navigation }) => {
   // Since we're working with multiple queries in one functional component,
@@ -36,20 +36,23 @@ const Home = ({ route, navigation }) => {
   // setting our modal state
   // *** this query is not necessary for this screen so this is
   // for demo purposes only***
-  const [queryUsers, { data, error }] = useLazyQuery(QUERY_USERS, {
-    onCompleted: (data) => {
-      if (!error) {
-        setModalStatus("Success!");
-        const user = data.users[0].username;
-        setModalData(user);
-        setShow(true);
-      } else {
-        setModalStatus("Error");
-        setModalData("Couldn't fetch user data...");
-        setShow(true);
-      }
-    },
-  });
+  const [queryUsers, { error, loading: usersLoading }] = useLazyQuery(
+    QUERY_USERS,
+    {
+      onCompleted: (data) => {
+        if (!error) {
+          setModalStatus("Success!");
+          const user = data.users[0].username;
+          setModalData(user);
+          setShow(true);
+        } else {
+          setModalStatus("Error");
+          setModalData("Couldn't fetch user data...");
+          setShow(true);
+        }
+      },
+    }
+  );
 
   // see return jsx for <StatusModal> and props
 
@@ -69,20 +72,36 @@ const Home = ({ route, navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar style="auto" />
-      <Text>Hello, {me.username}</Text>
-      {meLoading ? <Loading /> : <Card isHome={true} cardInfo={card} />}
-      <Button
-        style={{ marginTop: "15%" }}
-        title="Log Out"
-        onPress={() => logoutUser()}
-      />
-      <StatusModal
-        show={show}
-        setShow={setShow}
-        status={modalStatus}
-        data={modalData}
-      />
-      <Button title="Query Users and Test Modal" onPress={() => queryUsers()} />
+      {meLoading ? (
+        <AnimatedLoader
+          visible={true}
+          source={require("../assets/lottie/contact-fill.json")}
+          animationStyle={{ width: "100%", height: "100%" }}
+          speed={1}
+        />
+      ) : (
+        <>
+          <Text>Hello, {me.username}</Text>
+          <Card isHome={true} cardInfo={card} />
+          <View>
+            <Button
+              style={{ marginTop: "15%" }}
+              title="Log Out"
+              onPress={() => logoutUser()}
+            />
+            <StatusModal
+              show={show}
+              setShow={setShow}
+              status={modalStatus}
+              data={modalData}
+            />
+            <Button
+              title="Query Users and Test Modal"
+              onPress={() => queryUsers()}
+            />
+          </View>
+        </>
+      )}
     </SafeAreaView>
   );
 };

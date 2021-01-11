@@ -18,7 +18,7 @@ const Card = ({ isHome, cardInfo }) => {
       {/* Face Side */}
       <View style={styles.card}>
         {isHome && <EditCardButton cardData={cardInfo} />}
-        {cardInfo.companyName && (
+        {cardInfo.companyName !== "" && (
           <Text style={styles.title}>{cardInfo.companyName}</Text>
         )}
         {cardInfo.tagline && (
