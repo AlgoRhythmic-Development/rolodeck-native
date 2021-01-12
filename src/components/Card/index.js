@@ -2,34 +2,43 @@ import React from "react";
 import { StyleSheet, StatusBar, Text, View, Image } from "react-native";
 import FlipCard from "react-native-flip-card";
 import QrCode from "react-native-qrcode-svg";
+// component imports
+import EditCardButton from "../EditCardButton";
 
-const Card = ({ cardInfo }) => (
-  <FlipCard
-    friction={6}
-    perspective={1000}
-    flipHorizontal={true}
-    flipVertical={false}
-    flip={false}
-    clickable={true}
-  >
-    {/* Face Side */}
-    <View style={styles.card}>
-      {cardInfo.companyName && (
-        <Text style={styles.title}>{cardInfo.companyName}</Text>
-      )}
-      {cardInfo.tagline && <Text style={styles.item}>{cardInfo.tagline}</Text>}
-      <Text style={styles.item}>{cardInfo.name}</Text>
-      <Text style={styles.item}>{cardInfo.jobTitle}</Text>
-      {cardInfo.website && <Text style={styles.item}>{cardInfo.website}</Text>}
-      <Text style={styles.item}>{cardInfo.phone}</Text>
-      <Text style={styles.item}>{cardInfo.email}</Text>
-    </View>
-    {/* Back Side */}
-    <View style={styles.back}>
-      <QrCode value="some random string" />
-    </View>
-  </FlipCard>
-);
+const Card = ({ isHome, cardInfo }) => {
+  return (
+    <FlipCard
+      friction={6}
+      perspective={1000}
+      flipHorizontal={true}
+      flipVertical={false}
+      flip={false}
+      clickable={true}
+    >
+      {/* Face Side */}
+      <View style={styles.card}>
+        {isHome && <EditCardButton cardData={cardInfo} />}
+        {cardInfo.companyName !== "" && (
+          <Text style={styles.title}>{cardInfo.companyName}</Text>
+        )}
+        {cardInfo.tagline && (
+          <Text style={styles.item}>{cardInfo.tagline}</Text>
+        )}
+        <Text style={styles.item}>{cardInfo.name}</Text>
+        <Text style={styles.item}>{cardInfo.jobTitle}</Text>
+        {cardInfo.website && (
+          <Text style={styles.item}>{cardInfo.website}</Text>
+        )}
+        <Text style={styles.item}>{cardInfo.phone}</Text>
+        <Text style={styles.item}>{cardInfo.email}</Text>
+      </View>
+      {/* Back Side */}
+      <View style={styles.back}>
+        <QrCode value="some random string" />
+      </View>
+    </FlipCard>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
