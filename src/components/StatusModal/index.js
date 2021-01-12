@@ -6,6 +6,7 @@ import {
   Text,
   TouchableHighlight,
   View,
+  ScrollView,
 } from "react-native";
 
 const StatusModal = ({ show, setShow, status, data }) => {
@@ -14,12 +15,12 @@ const StatusModal = ({ show, setShow, status, data }) => {
 
   //   const [show, setShow] = useState(false);
 
-  //   You'll also need to pass in the status message (either "Success!"
+  //   You'll need to pass in the status message (either "Success!"
   //   or a message indicating an error)
   //   from the parent as a "status" prop:
   //   const [modalStatus, setModalStatus] = useState("Success!");
 
-  //   Finally, you can also pass the modal a "data" prop with any other
+  //   You can also pass the modal a "data" prop with any other
   //   information or data you want displayed beneath the status message.
   //   This may need tweaking down the road but I thought it may be useful
   //   for displaying cards, search results etc.
@@ -38,15 +39,15 @@ const StatusModal = ({ show, setShow, status, data }) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>{status}</Text>
-            <Text style={styles.modalText}>{data}</Text>
+            <Text style={styles.status}>{status}</Text>
+            <Text style={styles.data}>{data}</Text>
             <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              style={{ ...styles.openButton }}
               onPress={() => {
                 setShow(!show);
               }}
             >
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>Close</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -60,40 +61,50 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
   },
   modalView: {
-    margin: 20,
+    margin: 5,
     backgroundColor: "#2EB67D",
     borderRadius: 20,
-    padding: 35,
+    paddingTop: 15,
+    paddingBottom: 10,
+    paddingHorizontal: 30,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 4,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
-  },
-  openButton: {
-    backgroundColor: "#F194FF",
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
+    elevation: 10,
   },
   textStyle: {
     color: "white",
-    // fontWeight: "bold",
+    textAlign: "center",
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    fontSize: 20,
+  },
+  status: {
+    color: "white",
+    fontSize: 40,
+    fontWeight: "bold",
+    marginBottom: 35,
     textAlign: "center",
   },
-  modalText: {
+  data: {
     color: "white",
-    fontSize: 50,
-    fontWeight: "bold",
-    marginVertical: 100,
+    fontSize: 25,
+    fontWeight: "normal",
+    marginBottom: 35,
     textAlign: "center",
+  },
+  openButton: {
+    backgroundColor: "#2196F3",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
   },
 });
 

@@ -83,6 +83,25 @@ export const QUERY_USER = gql`
   }
 `;
 
+export const QUERY_USER_CARDS = gql`
+  query user($_id: ID!) {
+    user(_id: $_id) {
+      _id
+      cards {
+        _id
+        logoUrl
+        companyName
+        tagline
+        name
+        jobTitle
+        website
+        phone
+        email
+      }
+    }
+  }
+`;
+
 export const QUERY_USERS = gql`
   {
     users {
@@ -105,8 +124,8 @@ export const QUERY_USERS = gql`
 `;
 
 export const QUERY_CARDS = gql`
-  query cards($username: String) {
-    cards(username: $username) {
+  {
+    cards {
       _id
       logoUrl
       companyName
@@ -134,23 +153,6 @@ export const QUERY_CARD = gql`
       phone
       email
       username
-    }
-  }
-`;
-
-export const QUERY_USER_CARDS = gql`
-  query userCards($name: String!) {
-    userCards(name: $name) {
-      _id
-      username
-      logoUrl
-      companyName
-      tagline
-      name
-      jobTitle
-      website
-      phone
-      email
     }
   }
 `;

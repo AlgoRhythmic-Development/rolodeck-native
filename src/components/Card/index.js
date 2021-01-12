@@ -1,9 +1,11 @@
-import React from 'react';
-import { StyleSheet, StatusBar, Text, View, Image } from 'react-native';
-import FlipCard from 'react-native-flip-card';
-import QrCode from 'react-native-qrcode-svg';
+import React from "react";
+import { StyleSheet, StatusBar, Text, View, Image } from "react-native";
+import FlipCard from "react-native-flip-card";
+import QrCode from "react-native-qrcode-svg";
+// component imports
+import EditCardButton from "../EditCardButton";
 
-const Card = ({ cardInfo }) => {
+const Card = ({ isHome, cardInfo }) => {
   return (
     <FlipCard
       friction={6}
@@ -15,7 +17,8 @@ const Card = ({ cardInfo }) => {
     >
       {/* Face Side */}
       <View style={styles.card}>
-        {cardInfo.companyName && (
+        {isHome && <EditCardButton cardData={cardInfo} />}
+        {cardInfo.companyName !== "" && (
           <Text style={styles.title}>{cardInfo.companyName}</Text>
         )}
         {cardInfo.tagline && (
