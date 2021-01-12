@@ -9,10 +9,6 @@ const ProfileScreen = ({ navigation }) => {
 
   const me = data?.me || {};
 
-  if (!loading) {
-    console.log(data);
-  }
-
   return (
     <>
       <StatusBar style="auto" />

@@ -9,7 +9,7 @@ class AuthService {
       const profile = jwt_decode(token);
       return profile.data;
     }
-    return console.log("no user profile found");
+    return console.error("no user profile found");
   };
 
   // check if the user is still logged in
@@ -29,8 +29,6 @@ class AuthService {
   isTokenExpired = async (token) => {
     try {
       const decoded = await jwt_decode(token);
-      console.log(decoded);
-      console.log(Date.now() / 1000);
       if (decoded.exp < Date.now() / 1000) {
         return true;
       } else {
@@ -54,7 +52,7 @@ class AuthService {
     try {
       await AsyncStorage.setItem("id_token", idToken);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
@@ -64,7 +62,6 @@ class AuthService {
     try {
       await AsyncStorage.removeItem("id_token");
     } catch (e) {
-      console.log("Couldn't log out: ");
       console.error(e);
     }
   };
