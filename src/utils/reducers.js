@@ -1,5 +1,5 @@
-import { useReducer } from "react";
-import { LOG_IN, LOG_OUT } from "./actions";
+import { useReducer } from 'react';
+import { LOG_IN, LOG_OUT, GET_ID } from './actions';
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -12,6 +12,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isLoggedIn: false,
+      };
+    case SET_ID:
+      return {
+        ...state,
+        scannedId,
       };
     default:
       return {
