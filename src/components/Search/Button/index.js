@@ -1,8 +1,6 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { ADD_COLLECTED_CARD } from '../../../utils/mutations';
-import Button from 'react-bootstrap/Button';
 
 const AddCardButton = ({ addCollectedCard, id }) => {
 

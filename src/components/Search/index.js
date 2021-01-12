@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Alert, Button, StatusBar, Text, TextInput, View } from "react-native";
 import { useLazyQuery } from "@apollo/client";
-import { QUERY_USER_CARDS } from "src/utils/queries.js";
+import { QUERY_USER_CARDS } from "../../utils/queries.js";
 import ResultsModal from "../SearchResultsModal";
 
 const Search = ({ addCollectedCard, collectedCards }) => {

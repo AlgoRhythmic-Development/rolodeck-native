@@ -10,6 +10,8 @@ import AnimatedLoader from "react-native-animated-loader";
 // components
 import Card from "../components/Card";
 import StatusModal from "../components/StatusModal";
+import Search from "../components/Search";
+
 
 const Home = ({ route, navigation }) => {
   // Since we're working with multiple queries in one functional component,

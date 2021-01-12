@@ -1,7 +1,4 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.css";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import CardComponent from "../Card";
 import AddCardButton from "../Search/Button";
 
