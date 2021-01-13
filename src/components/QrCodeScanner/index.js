@@ -5,49 +5,47 @@ import { useMutation, useLazyQuery } from '@apollo/client';
 import { QUERY_CARD } from '../../utils/queries';
 import { ADD_COLLECTED_CARD } from '../../utils/mutations';
 import StatusModal from '../StatusModal';
-// import { useStoreContext } from '../../utils/Store';
-// import { SET_ID } from '../../utils/reducers';
 
 export default function QrCodeScanner() {
+  // STATE
   const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
-  const [modalToggle, setModalToggle] = useState(false);
-  // const [result, setResult] = useState();
-  // const [oldResult, setOldResult] = useState();
-  // const [state, dispatch] = useStoreContext();
+  const [scannedBool, setScannedBool] = useState(false);
+  const [modalToggleBool, setModalToggleBool] = useState(false)
 
-  // const cardId = '5ff3f4802cc5664cd0a1126d';
+  // QUERIES & MUTATIONS
+  // query cards
   const [getCard, { data, error }] = useLazyQuery(QUERY_CARD, {
-    variables: { _id: cardId },
+    variables: { _id: dataStr },
   });
+  // mutate card collection
   const [addCard] = useMutation(ADD_COLLECTED_CARD);
-  const card = data?.card || {};
+  const cardObj = data?.card || {};
 
+  // USE EFFECTS
+  // ask for permission on render
   useEffect(() => {
     (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      const { statusStr } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(statusStr === 'granted');
     })();
   }, []);
-
+  // on scan set modalToggleBool to true
   useEffect(() => {
-    // after qrscanner collapses and if you scanned a new code show the success modal
-    if (modalToggle) {
-      setModalToggle(true);
+    if (!modalToggleBool) {
+      setModalToggleBool(true);
     }
-  }, [scanned]);
+  }, [scannedBool]);
 
-  const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    getCard({ variables: { _id: data } });
-    addCard({ variables: { _id: card } });
-    setModalToggle(true);
-    dispatch({ type: SET_ID, scannedId: data });
-    // mutate the collection to have that card in it
+  // CALLBACKS & CONDITIONS
+  const handleBarCodeScanned = ({ typeStr, dataStr }) => {
+    setScannedBool(true);
+    alert(`Bar code with type ${typeStr} and data ${dataStr} has been scanned!`);
+    getCard({ variables: { _id: dataStr } });
+    addCard({ variables: { _id: cardObj } });
+    setModalToggleBool(true);
     //"{id: jasldhgpa9erbasvnlkasjj, username: jake, businessName: Lendio}"
   };
-
+  // check that device has allowed permission and return notice to user
   if (hasPermission === null) {
     return <Text>Requesting for camera permission</Text>;
   }
@@ -58,18 +56,18 @@ export default function QrCodeScanner() {
   return (
     <SafeAreaView>
       <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        onBarCodeScanned={scannedBool ? undefined : handleBarCodeScanned}
         style={styles.camera}
       />
-      {scanned && (
-        <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />
+      {scannedBool && (
+        <Button title={'Tap to Scan Again'} onPress={() => setScannedBool(false)} />
       )}
       {modalToggle && (
         <StatusModal
-          show={modalToggle}
-          setShow={setModalToggle}
+          show={modalToggleBool}
+          setShow={setModalToggleBool}
           status="Success!"
-          data={card}
+          data={cardObj}
         />
       )}
     </SafeAreaView>
