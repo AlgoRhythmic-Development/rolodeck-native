@@ -15,7 +15,7 @@ export default function QrCodeScanner() {
   // QUERIES & MUTATIONS
   // query cards
   const [getCard, { data, error }] = useLazyQuery(QUERY_CARD, {
-    variables: { _id: dataStr },
+    variables: { _id: data },
   });
   // mutate card collection
   const [addCard] = useMutation(ADD_COLLECTED_CARD);
@@ -37,10 +37,10 @@ export default function QrCodeScanner() {
   }, [scannedBool]);
 
   // CALLBACKS & CONDITIONS
-  const handleBarCodeScanned = ({ typeStr, dataStr }) => {
+  const handleBarCodeScanned = ({ typeStr, data }) => {
     setScannedBool(true);
-    alert(`Bar code with type ${typeStr} and data ${dataStr} has been scanned!`);
-    getCard({ variables: { _id: dataStr } });
+    alert(`Bar code with type ${typeStr} and data ${data} has been scanned!`);
+    getCard({ variables: { _id: data } });
     addCard({ variables: { _id: cardObj } });
     setModalToggleBool(true);
     //"{id: jasldhgpa9erbasvnlkasjj, username: jake, businessName: Lendio}"
