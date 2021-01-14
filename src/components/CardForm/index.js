@@ -1,6 +1,8 @@
 import React from "react";
 import { Alert, Button, Keyboard, StatusBar, Text, TextInput, TouchableWithoutFeedback, View } from "react-native";
 import { Formik } from 'formik';
+import {useLazyQuery, useMutation} from '@apollo/client';
+import { ADD_COLLECTED_CARD } from "../../utils/mutations";
 
 // const CardForm = () => {
     // This is stuff that we will need to add in/fix later.
@@ -141,6 +143,9 @@ export default function Cardform() {
     // this is where we'll need to pass the login data to the back end.
 
     // edit this form to include formik info.
+
+    // query stuff
+
     return(
         <View>
             <Text>Fill out the form below</Text>
