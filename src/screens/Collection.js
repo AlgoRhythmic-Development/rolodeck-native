@@ -1,33 +1,28 @@
 import React from 'react';
 import { View } from 'react-native';
 import { useQuery } from '@apollo/client';
-import { QUERY_CARDS } from '../utils/queries';
+import { QUERY_MY_COLLECTION } from '../utils/queries';
 import { FlatList } from 'react-native-gesture-handler';
 import Card from '../components/Card';
+import { useStoreContext } from '../utils/Store';
+import SET_ID from '../utils/reducers';
 
 const Collection = () => {
-  // let id = '5fd45172ff34161dc421c37e'
-  // const { data, loading } = useQuery(QUERY_CARD, { variables: { id } })
-  // const cardData = data?.card || []
-  // console.log(cardData)
-  const cardArr = [];
-  for (let i = 0; i < 10; i++) {
-    let randomInfo = faker.helpers.createCard();
-    let randomImage = faker.image.image();
-    console.log(randomImage);
+  // const [state] = useStoreContext();
+  // const { scannedId } = state;
 
-    cardArr.push({ randomInfo, randomImage });
-    console.log(cardArr);
-  }
+  const { data } = useQuery(QUERY_MY_COLLECTION);
+  const collectedCards = data?.collectedCards || [];
+  console.log(collectedCards)
 
-  const renderItem = ({ item }) => <Card card={item} />;
+  const renderItem = ({ item }) => <Card cardInfo={item} />;
 
   return (
     <View>
       <FlatList
-        data={data}
+        data={collectedCards}
         renderItem={renderItem}
-        keyExtractor={ item => item.username }
+        keyExtractor={(item) => item._id}
       />
     </View>
   );
