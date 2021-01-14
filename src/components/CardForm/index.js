@@ -145,7 +145,6 @@ export default function Cardform() {
     // edit this form to include formik info.
 
     // query stuff
-    const [addCard] = useMutation(ADD_COLLECTED_CARD)
 
     return(
         <View>
@@ -164,7 +163,6 @@ export default function Cardform() {
                 onSubmit={(values, actions) => {
                     actions.resetForm();
                     console.log(values);
-                    addCard(values)
                 }}
             >
                 {(props) => (
