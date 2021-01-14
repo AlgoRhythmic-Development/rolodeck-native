@@ -15,14 +15,14 @@ const Collection = () => {
   const collectedCards = data?.collectedCards || [];
   console.log(collectedCards)
 
-  const renderItem = ({ item }) => <Card card={item} />;
+  const renderItem = ({ item }) => <Card cardInfo={item} />;
 
   return (
     <View>
       <FlatList
         data={collectedCards}
         renderItem={renderItem}
-        keyExtractor={(item) => item.username}
+        keyExtractor={(item) => item._id}
       />
     </View>
   );
