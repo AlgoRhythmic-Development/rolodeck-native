@@ -34,7 +34,7 @@ const Card = ({ isHome, cardInfo }) => {
       </View>
       {/* Back Side */}
       <View style={styles.back}>
-        <QrCode value="some random string" />
+        <QrCode value={cardInfo._id} />
       </View>
     </FlipCard>
   );
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   card: {
-    backgroundColor: 'pink',
+    backgroundColor: "pink",
     margin: 20,
     borderRadius: 20,
   },
@@ -54,17 +54,17 @@ const styles = StyleSheet.create({
     margin: 20,
     borderRadius: 20,
     paddingVertical: 175,
-    backgroundColor: 'darkcyan',
+    backgroundColor: "darkcyan",
   },
   item: {
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
   title: {
     fontSize: 32,
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: 20,
   },
 });
