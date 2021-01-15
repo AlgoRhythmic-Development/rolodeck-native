@@ -60,14 +60,22 @@ export default function QrCodeScanner() {
     return <Text>No access to camera</Text>;
   }
 
+  if (show) {
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <StatusModal
+          style={{ width: 100 }}
+          show={show}
+          setShow={setShow}
+          status={modalStatus}
+          data={modalData}
+        />
+      </SafeAreaView>
+    );
+  }
+
   return (
-    <SafeAreaView>
-      <StatusModal
-        show={show}
-        setShow={setShow}
-        status={modalStatus}
-        data={modalData}
-      />
+    <SafeAreaView style={{ flex: 1 }}>
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={styles.camera}

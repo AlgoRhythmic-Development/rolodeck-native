@@ -43,23 +43,29 @@ const Card = ({ isHome, cardInfo }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: StatusBar.currentHeight || 0,
   },
   card: {
+    height: "25%",
     backgroundColor: "pink",
-    margin: 20,
-    borderRadius: 20,
+    margin: 8,
+    borderRadius: 6,
   },
   back: {
-    margin: 20,
-    borderRadius: 20,
-    paddingVertical: 175,
+    height: "25%",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 8,
+    borderRadius: 6,
+    paddingVertical: 10,
     backgroundColor: "darkcyan",
   },
   item: {
-    padding: 20,
+    padding: 1,
     marginVertical: 8,
-    marginHorizontal: 16,
+    marginHorizontal: 5,
     textAlign: "center",
   },
   title: {

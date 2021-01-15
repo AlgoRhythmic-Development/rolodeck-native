@@ -5,8 +5,8 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
+  SafeAreaView,
   View,
-  ScrollView,
 } from "react-native";
 
 const StatusModal = ({ show, setShow, status, data }) => {
@@ -28,7 +28,7 @@ const StatusModal = ({ show, setShow, status, data }) => {
 
   //   See Home screen for usage example
   return (
-    <View style={styles.centeredView}>
+    <SafeAreaView style={styles.centeredView}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -52,7 +52,7 @@ const StatusModal = ({ show, setShow, status, data }) => {
           </View>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -63,12 +63,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalView: {
-    margin: 5,
+    flex: 1,
+    marginTop: 50,
+    marginBottom: 17,
     backgroundColor: "#2EB67D",
     borderRadius: 20,
     paddingTop: 15,
     paddingBottom: 10,
-    paddingHorizontal: 30,
+    paddingHorizontal: 90,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
