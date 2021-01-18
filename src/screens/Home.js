@@ -10,7 +10,6 @@ import AnimatedLoader from "react-native-animated-loader";
 // components
 import Card from "../components/Card";
 import StatusModal from "../components/StatusModal";
-import Search from "../components/Search";
 import { ADD_COLLECTED_CARD } from "../utils/mutations";
 
 
@@ -125,10 +124,6 @@ const Home = ({ route, navigation }) => {
                             <Button
                                 title="Query Users and Test Modal"
                                 onPress={() => queryUsers()}
-                            />
-                            <Search
-                                addCollectedCard={addCollectedCard}
-                                collectedCards={collectedCards}
                             />
                         </View>
                     </>
