@@ -30,6 +30,7 @@ export default function Cardform() {
         setModalData("See your new card on the Home screen");
         setShow(true);
       } else {
+        console.log(error);
         setModalStatus("Error");
         setModalData("Couldn't create card...");
         setShow(true);
@@ -92,7 +93,6 @@ export default function Cardform() {
         onSubmit={(values, actions) => {
           console.log(values);
           handleFormSubmit({ values });
-          actions.resetForm();
         }}
       >
         {(props) => (
@@ -149,7 +149,7 @@ export default function Cardform() {
               name="phone"
               id="phone"
               placeholder="Enter phone number"
-              keyboardType="numeric"
+              //   keyboardType="numeric"
               onChangeText={props.handleChange("phone")}
               value={props.values.phone}
             />
