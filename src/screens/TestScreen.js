@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-// import Constants from "expo-constants";
+import Constants from "expo-constants";
 import React, { useState } from "react";
 import {
   View,
@@ -19,50 +19,44 @@ import CardModal from "../components/CardModal";
 // ****** THIS IS A SCREEN FOR TESTING OTHER COMPONENTS, QUERIES, ETC ******
 
 const TestScreen = () => {
-  let myCard = {};
+  const [myCard, setMyCard] = useState();
   const { data, loading } = useQuery(QUERY_ME, {
     onCompleted: (data) => {
-      myCard = data.me.cards[0] || {};
+      setMyCard(data.me.cards[0] || {});
+      console.log(myCard);
     },
   });
 
   const [show, setShow] = useState(false);
 
   return (
-    <>
+    <SafeAreaView style={styles.container}>
+      <StatusBar style="auto" />
       {loading ? (
         <Loading />
       ) : (
-        <SafeAreaView style={styles.container}>
-          <StatusBar style="auto" />
+        <>
           <Text>Test Your Stuff Here!</Text>
-          {myCard ? (
-            <>
-              <CardModal
-                show={show}
-                setShow={setShow}
-                isHome={false}
-                cardData={myCard}
-              />
-              <Button title="Show CardModal" onPress={setShow(true)} />
-            </>
-          ) : (
-            <Text>No card data found...</Text>
-          )}
-        </SafeAreaView>
+          <CardModal
+            show={show}
+            setShow={setShow}
+            isHome={false}
+            cardData={myCard}
+          />
+          <Button title="Show CardModal" onPress={() => setShow(true)} />
+        </>
       )}
-    </>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: Constants.statusBarHeight,
     marginHorizontal: 16,
-  },
-  list: {
-    marginTop: "10%",
   },
 });
 

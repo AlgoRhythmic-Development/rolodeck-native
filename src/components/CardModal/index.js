@@ -6,7 +6,7 @@ import {
   Text,
   TouchableHighlight,
   View,
-  ScrollView,
+  SafeAreaView,
 } from "react-native";
 // component imports
 import Card from "../Card";
@@ -36,15 +36,17 @@ const CardModal = ({ show, setShow, isHome, cardData }) => {
     <View style={styles.centeredView}>
       <Modal animationType="slide" transparent={true} visible={show}>
         <View style={styles.centeredView}>
-          <Card isHome={isHome} cardData={cardData} />
-          <TouchableHighlight
-            style={{ ...styles.closeBtn }}
-            onPress={() => {
-              setShow(!show);
-            }}
-          >
-            <Text style={styles.textStyle}>Close</Text>
-          </TouchableHighlight>
+          <View style={styles.modalView}>
+            <Card isHome={isHome} cardData={cardData} />
+            <TouchableHighlight
+              style={{ ...styles.closeBtn }}
+              onPress={() => {
+                setShow(!show);
+              }}
+            >
+              <Text style={styles.textStyle}>Close</Text>
+            </TouchableHighlight>
+          </View>
         </View>
       </Modal>
     </View>
@@ -58,12 +60,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalView: {
-    margin: 5,
-    backgroundColor: "#2EB67D",
+    marginVertical: 220,
+    marginHorizontal: 5,
     borderRadius: 20,
     paddingTop: 15,
     paddingBottom: 10,
-    paddingHorizontal: 30,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -81,21 +82,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     fontSize: 20,
   },
-  status: {
-    color: "white",
-    fontSize: 40,
-    fontWeight: "bold",
-    marginBottom: 35,
-    textAlign: "center",
-  },
-  data: {
-    color: "white",
-    fontSize: 25,
-    fontWeight: "normal",
-    marginBottom: 35,
-    textAlign: "center",
-  },
   closeBtn: {
+    marginTop: 0,
     backgroundColor: "#2196F3",
     borderRadius: 20,
     padding: 10,
