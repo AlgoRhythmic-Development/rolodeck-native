@@ -5,7 +5,7 @@ import QrCode from "react-native-qrcode-svg";
 // component imports
 import EditCardButton from "../EditCardButton";
 
-const Card = ({ isHome, cardInfo }) => {
+const Card = ({ isHome, cardData }) => {
   return (
     <FlipCard
       friction={6}
@@ -17,20 +17,20 @@ const Card = ({ isHome, cardInfo }) => {
     >
       {/* Face Side */}
       <View style={styles.card}>
-        {isHome && <EditCardButton cardData={cardInfo} />}
-        {cardInfo.companyName !== "" && (
-          <Text style={styles.title}>{cardInfo.companyName}</Text>
+        {isHome && <EditCardButton cardData={cardData} />}
+        {cardData.companyName !== "" && (
+          <Text style={styles.title}>{cardData.companyName}</Text>
         )}
-        {cardInfo.tagline && (
-          <Text style={styles.item}>{cardInfo.tagline}</Text>
+        {cardData.tagline && (
+          <Text style={styles.item}>{cardData.tagline}</Text>
         )}
-        <Text style={styles.item}>{cardInfo.name}</Text>
-        <Text style={styles.item}>{cardInfo.jobTitle}</Text>
-        {cardInfo.website && (
-          <Text style={styles.item}>{cardInfo.website}</Text>
+        <Text style={styles.item}>{cardData.name}</Text>
+        <Text style={styles.item}>{cardData.jobTitle}</Text>
+        {cardData.website && (
+          <Text style={styles.item}>{cardData.website}</Text>
         )}
-        <Text style={styles.item}>{cardInfo.phone}</Text>
-        <Text style={styles.item}>{cardInfo.email}</Text>
+        <Text style={styles.item}>{cardData.phone}</Text>
+        <Text style={styles.item}>{cardData.email}</Text>
       </View>
       {/* Back Side */}
       <View style={styles.back}>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   card: {
-    backgroundColor: 'pink',
+    backgroundColor: "pink",
     margin: 20,
     borderRadius: 20,
   },
@@ -54,17 +54,17 @@ const styles = StyleSheet.create({
     margin: 20,
     borderRadius: 20,
     paddingVertical: 175,
-    backgroundColor: 'darkcyan',
+    backgroundColor: "darkcyan",
   },
   item: {
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
   title: {
     fontSize: 32,
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: 20,
   },
 });
