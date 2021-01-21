@@ -77,12 +77,12 @@ const Home = ({ route, navigation }) => {
           visible={true}
           source={require("../assets/lottie/contact-fill.json")}
           animationStyle={{ width: "100%", height: "100%" }}
-          speed={1}
+          speed={0.5}
         />
       ) : (
         <>
           <Text>Hello, {me.username}</Text>
-          <Card isHome={true} cardInfo={card} />
+          <Card isHome={true} cardData={card} />
           <View>
             <Button
               style={{ marginTop: "15%" }}

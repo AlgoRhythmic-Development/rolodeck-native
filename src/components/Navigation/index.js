@@ -3,8 +3,6 @@ import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { useStoreContext } from "../../utils/Store";
-import { LOG_IN } from "../../utils/actions";
-import Auth from "../../utils/auth";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../../screens/Home";
 import Login from "../../screens/Login";
@@ -13,6 +11,7 @@ import SignupScreen from "../../screens/Signup";
 import Contact from "../../screens/Contact";
 import Collection from "../../screens/Collection";
 import ScanScreen from "../../screens/ScanScreen";
+import TestScreen from "../../screens/TestScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,7 +33,7 @@ const Navigation = () => {
             <Tab.Screen name="Collection" component={Collection} />
             <Tab.Screen name="Scan" component={ScanScreen} />
             <Tab.Screen name="Create" component={Create} />
-            <Tab.Screen name="Contact" component={Contact} />
+            <Tab.Screen name="Testing" component={TestScreen} />
           </>
         )}
       </Tab.Navigator>
