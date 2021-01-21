@@ -13,6 +13,7 @@ import SignupScreen from "../../screens/Signup";
 import Contact from "../../screens/Contact";
 import Collection from "../../screens/Collection";
 import ScanScreen from "../../screens/ScanScreen";
+import Search from '../../screens/Search'
 
 const Tab = createBottomTabNavigator();
 
@@ -32,6 +33,7 @@ const Navigation = () => {
           <>
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Collection" component={Collection} />
+            <Tab.Screen name="Search" component={Search} />
             <Tab.Screen name="Scan" component={ScanScreen} />
             <Tab.Screen name="Create" component={Create} />
             <Tab.Screen name="Contact" component={Contact} />
