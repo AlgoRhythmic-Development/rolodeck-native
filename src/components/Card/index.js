@@ -1,11 +1,14 @@
-import React from "react";
-import { StyleSheet, StatusBar, Text, View, Image } from "react-native";
-import FlipCard from "react-native-flip-card";
-import QrCode from "react-native-qrcode-svg";
+import React from 'react';
+import { StyleSheet, StatusBar, Text, View, Image } from 'react-native';
+import FlipCard from 'react-native-flip-card';
+import QrCode from 'react-native-qrcode-svg';
 // component imports
-import EditCardButton from "../EditCardButton";
+import EditCardButton from '../EditCardButton';
+
+import Note from '../Note';
 
 const Card = ({ isHome, cardInfo }) => {
+  console.log(cardInfo);
   return (
     <FlipCard
       friction={6}
@@ -18,7 +21,8 @@ const Card = ({ isHome, cardInfo }) => {
       {/* Face Side */}
       <View style={styles.card}>
         {isHome && <EditCardButton cardData={cardInfo} />}
-        {cardInfo.companyName !== "" && (
+        {/* something in this block of code is breaking "strings must be rendered in <Text> element*/}
+        {cardInfo.companyName && (
           <Text style={styles.title}>{cardInfo.companyName}</Text>
         )}
         {cardInfo.tagline && (
@@ -29,12 +33,14 @@ const Card = ({ isHome, cardInfo }) => {
         {cardInfo.website && (
           <Text style={styles.item}>{cardInfo.website}</Text>
         )}
+        {/* end of block */}
         <Text style={styles.item}>{cardInfo.phone}</Text>
         <Text style={styles.item}>{cardInfo.email}</Text>
       </View>
       {/* Back Side */}
       <View style={styles.back}>
         <QrCode value="some random string" />
+        <Note />
       </View>
     </FlipCard>
   );
