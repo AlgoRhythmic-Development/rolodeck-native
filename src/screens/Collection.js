@@ -11,7 +11,7 @@ const Collection = () => {
   // console.log(collectedCards)
   // console.log("render")
 
-  const renderItem = ({ item }) => <Card isHome={true} cardInfo={item} />;
+  const renderItem = ({ item }) => <Card cardInfo={item} />;
 
   return (
     <View>
