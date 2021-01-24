@@ -1,14 +1,29 @@
-import React from 'react';
-import { StyleSheet, StatusBar, Text, View, Image } from 'react-native';
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  StatusBar,
+  Text,
+  View,
+  TextInput,
+  Pressable,
+} from 'react-native';
 import FlipCard from 'react-native-flip-card';
 import QrCode from 'react-native-qrcode-svg';
 // component imports
 import EditCardButton from '../EditCardButton';
+import { useMutation } from '@apollo/client';
+import { UPDATE_CARD } from '../../utils/mutations';
 
-import Note from '../Note';
+// import Notes from '../Notes';
 
 const Card = ({ isHome, cardInfo }) => {
-  console.log(cardInfo);
+  // used to update notes
+  const [addNote] = useMutation(UPDATE_CARD);
+  // used to set the value for inputs
+  const [value, onChangeText] = useState(cardInfo.notes);
+  // used to toggle edit mode for the note
+  const [noteEditModeBool, setNoteEditModeBool] = useState(false);
+
   return (
     <FlipCard
       friction={6}
@@ -18,29 +33,87 @@ const Card = ({ isHome, cardInfo }) => {
       flip={false}
       clickable={true}
     >
-      {/* Face Side */}
+      {/* FRONT SIDE */}
       <View style={styles.card}>
+        {/* render edit button */}
         {isHome && <EditCardButton cardData={cardInfo} />}
-        {/* something in this block of code is breaking "strings must be rendered in <Text> element*/}
-        {cardInfo.companyName && (
+
+        {/* render card attributes from props, some will only render if they exist */}
+        {cardInfo.companyName ? (
           <Text style={styles.title}>{cardInfo.companyName}</Text>
-        )}
-        {cardInfo.tagline && (
+        ) : undefined}
+        {cardInfo.tagline ? (
           <Text style={styles.item}>{cardInfo.tagline}</Text>
-        )}
+        ) : undefined}
         <Text style={styles.item}>{cardInfo.name}</Text>
         <Text style={styles.item}>{cardInfo.jobTitle}</Text>
-        {cardInfo.website && (
+        {cardInfo.website ? (
           <Text style={styles.item}>{cardInfo.website}</Text>
-        )}
-        {/* end of block */}
+        ) : undefined}
         <Text style={styles.item}>{cardInfo.phone}</Text>
         <Text style={styles.item}>{cardInfo.email}</Text>
       </View>
-      {/* Back Side */}
+
+      {/* BACK SIDE */}
       <View style={styles.back}>
+        {/* render qr code */}
         <QrCode value="some random string" />
-        <Note />
+
+        {/* if notes already exist */}
+        {cardInfo.notes ? (
+          <View>
+            {/* if note edit mode is pressed then render the note in a text input */}
+            {noteEditModeBool ? (
+              <View>
+                <TextInput
+                  name="note"
+                  id="note"
+                  onChangeText={(text) => {
+                    onChangeText(text);
+                  }}
+                  value={cardInfo.note}
+                />
+                {/* render a button for user to click to save updates to note */}
+                <Pressable
+                  onClick={(text) => {
+                    addNote({
+                      variables: { _id: cardInfo._id, input: { notes: text } },
+                    });
+                    setNoteEditModeBool(false);
+                  }}
+                >
+                  <Text>Done!</Text>
+                </Pressable>
+              </View>
+            ) : (
+              <Pressable onClick={setNoteEditModeBool(true)}>
+                {/* if note edit mode has not been selected then render a button with the note as the content*/}
+                <Text style={styles.item}>{cardInfo.notes}</Text>
+              </Pressable>
+            )}
+          </View>
+        ) : (
+          <View>
+            {/* if notes don't already exist render a text input and a button to save user's note */}
+            <TextInput
+              name="note"
+              id="note"
+              onChangeText={(text) => {
+                onChangeText(text);
+              }}
+              value={value}
+            />
+            <Pressable
+              onClick={(text) => {
+                addNote({
+                  variables: { _id: cardInfo._id, input: { notes: text } },
+                });
+              }}
+            >
+              <Text>Done!</Text>
+            </Pressable>
+          </View>
+        )}
       </View>
     </FlipCard>
   );

@@ -3,7 +3,7 @@ import { Text, View, Pressable, TextInput } from 'react-native';
 import { useQuery } from '@apollo/client';
 import { QUERY_NOTE } from '../../utils/mutations';
 
-const Note = () => {
+const Notes = () => {
   const { data } = useQuery(QUERY_NOTE);
   const note = data?.note || '';
 
@@ -37,4 +37,4 @@ const Note = () => {
   );
 };
 
-export default Note;
+export default Notes;
