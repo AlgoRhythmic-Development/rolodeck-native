@@ -70,6 +70,7 @@ export const UPDATE_CARD = gql`
       website
       phone
       email
+      notes
     }
   }
 `;
