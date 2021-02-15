@@ -10,9 +10,11 @@ import { ApplicationProvider, Avatar } from '@ui-kitten/components';
 import { mapping, light as lightTheme } from '@eva-design/eva';
 
 
-  const Collection = () => {
-    // const [state] = useStoreContext();
-    // const { scannedId } = state;
+const Collection = () => {
+  const { data } = useQuery(QUERY_MY_COLLECTION);
+  const collectedCards = data?.me.collectedCards || [];
+  // console.log(collectedCards)
+  // console.log("render")
 
     const { data } = useQuery(QUERY_MY_COLLECTION);
     const collectedCards = data?.collectedCards || [];
