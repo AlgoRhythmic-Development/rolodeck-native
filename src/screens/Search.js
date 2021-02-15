@@ -5,6 +5,8 @@ import {
   ActivityIndicator,
   TouchableOpacity
 } from 'react-native'
+import { QUERY_MY_COLLECTION } from '../utils/queries';
+
 import filter from 'lodash.filter'
 import { ApplicationProvider, Text, Avatar, Input } from '@ui-kitten/components'
 import { mapping, light as lightTheme } from '@eva-design/eva'
